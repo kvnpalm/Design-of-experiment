@@ -1,0 +1,42 @@
+---
+title: "Introducción al Diseño de experimentos"
+author: "Kevin Palomino"
+date: "2024-01-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+El diseño de experimentos es una metodología fundamental en la investigación científica que busca establecer relaciones causales entre variables. Al planificar y ejecutar un experimento, se pretende controlar y manipular las condiciones bajo las cuales ocurren los fenómenos de interés, con el fin de obtener conclusiones válidas y confiables. A través de la adecuada selección y disposición de las variables, así como la aplicación de técnicas estadísticas apropiadas, el diseño experimental permite explorar y entender de manera sistemática el comportamiento de los sistemas estudiados. En este contexto, la precisión en la formulación y ejecución del diseño es esencial para garantizar la validez y la generalización de los resultados obtenidos.
+
+# Contenido
+
+1.  ¿Qué es el Diseño de Experimentos (DOE)?
+
+2.  Conceptos básicos.
+
+3.  Principios básicos.
+
+4.  Etapas del Diseño de Experimentos.
+
+# ¿Qué es el Diseño de Experimentos (DOE)?
+
+![](images/Screenshot%202024-02-02%20at%205.35.17%20PM.png)
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+<div>
+
+<p style="text-align:center;">
+
+<img src="https://pbs.twimg.com/media/EiAAHfoU4AADis4?format=jpg&amp;name=small" alt="JuveYell" width="300px"/>
+
+</p>
+
+</div>
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
