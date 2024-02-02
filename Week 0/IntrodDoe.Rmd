@@ -9,7 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-El diseño de experimentos es una metodología fundamental en la investigación científica que busca establecer relaciones causales entre variables. Al planificar y ejecutar un experimento, se pretende controlar y manipular las condiciones bajo las cuales ocurren los fenómenos de interés, con el fin de obtener conclusiones válidas y confiables. A través de la adecuada selección y disposición de las variables, así como la aplicación de técnicas estadísticas apropiadas, el diseño experimental permite explorar y entender de manera sistemática el comportamiento de los sistemas estudiados. En este contexto, la precisión en la formulación y ejecución del diseño es esencial para garantizar la validez y la generalización de los resultados obtenidos.
+<div style="text-align: justify">
+
+El diseño de experimentos es una metodología fundamental en la investigación científica que busca establecer relaciones causales entre variables. Al planificar y ejecutar un experimento, se pretende controlar y manipular las condiciones bajo las cuales ocurren los fenómenos de interés, con el fin de obtener conclusiones válidas y confiables. A través de la adecuada selección y disposición de las variables, así como la aplicación de técnicas estadísticas apropiadas, el diseño experimental permite explorar y entender de manera sistemática el comportamiento de los sistemas estudiados. En este contexto, la precisión en la formulación y ejecución del diseño es esencial para garantizar la validez y la generalización de los resultados obtenidos.ß
+
+<div/>
 
 # Contenido
 
@@ -21,22 +25,70 @@ El diseño de experimentos es una metodología fundamental en la investigación 
 
 4.  Etapas del Diseño de Experimentos.
 
-# ¿Qué es el Diseño de Experimentos (DOE)?
+5.  Repaso
 
-![](images/Screenshot%202024-02-02%20at%205.35.17%20PM.png)
+# 1. ¿Qué es el Diseño de Experimentos (DOE)?
 
+::: {style="text-align:center"}
+![](images/QDOE.png){width="497"}
+:::
+
+## 1.1 Objetivos del Diseño de Experimentos
+
+-   ***Relevancia***: Determinarr los factores significativos
+
+-   ***Optimización***: Fijar condiciones de operación
+
+-   ***Variabilidad***: Diseñar un proceso robusto
+
+-   ***Modelación***: Construir modelos de regresión
+
+# 2. Conceptos básicos
+
+-   ***Experimento***: Cambio en las condiciones de operación de un sistema con el objetivo de medir el efecto de dicho cambio en la respuesta.
+
+-   ***Unidad experimental***: Pieza(s) o muestra(s) que se utiliza para generar una medición de la respuesta.
+
+-   ***Variable de respuesta***: Variable a optimizar y que depende potencialmente de los factores. No es controlada por el experimentador.
+
+-   ***Factores***: Fenómenos que potencialmente causan variación y que se pueden fijar en un valor dado.
+
+-   ***Niveles de factores***: Valores que un factor puede tomar. Pueden ser categóricos o numéricos.
+
+-   ***Tratamiento***: Combinación de niveles de todos los factores involucrados en el experimento.
+
+-   ***Iteracción*****:** Impacto en la respuesta por el cambio de un factor influido por la presencia de otro.
+
+-   ***Corrida experimental***: Cada ejecución del experimento bajo un tratamiento para tener una medición de la variable de respuesta.
+
+-   ***Réplica***: Todas las corridas experimentales con la misma combinación de niveles (tratamientos).
+
+-   ***Experimento balanceado***: Experimento en que todos los niveles de cada factor aparece el mismo número de veces en las corridas.
+
+-   ***Error aleatorio***: Variabilidad de la respuesta que no está explicada por los factores del experimento.
+
+# 3. Principios básicos
+
+::: {style="text-align:center"}
+![](images/PDOE.png){width="641"}
+:::
+
+# 4. Etapas del Diseño de Experimentos
+
+::: {style="text-align:center"}
+![](images/EDOE.png){width="482"}
+:::
+
+# 5. Repaso: Intervalos de confianza y Prueba de hipótesis para diferencia de medias
+
+## 5.1 Intervalos de confiaza para diferencias de medias
+
+````{=html}
+<!---
+<font color='red'>test blue color font</font>
 ```{r pressure, echo=FALSE}
 plot(pressure)
+
 ```
-
-<div>
-
-<p style="text-align:center;">
-
-<img src="https://pbs.twimg.com/media/EiAAHfoU4AADis4?format=jpg&amp;name=small" alt="JuveYell" width="300px"/>
-
-</p>
-
-</div>
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+-->
+````
