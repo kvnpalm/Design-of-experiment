@@ -79,16 +79,163 @@ El diseño de experimentos es una metodología fundamental en la investigación 
 ![](images/EDOE.png){width="482"}
 :::
 
-# 5. Repaso: Intervalos de confianza y Prueba de hipótesis para diferencia de medias
+# 5. Repaso:
 
-## 5.1 Intervalos de confiaza para diferencias de medias
+## 5.1 Distribución de probabilidades
 
-````{=html}
-<!---
-<font color='red'>test blue color font</font>
-```{r pressure, echo=FALSE}
-plot(pressure)
+### 5.1.1 Muestras grandes
+
+<div style="text-align: justify">
+
+Sea $\overline{x}$ la media de una muestra aleatoria de tamaño n selecionada de una población con media $\mu$ y varianza $\sigma^2>0$. Supongamos que se cumple alguna de las siguientes condiciones:
+
+<div/>
+
+(a) La población es normal y $\sigma^2$ es conocida (No importa el tamaño de n).
+(b) La población es normal y $\sigma^2$ es desconocida y $n\geq30$.
+(c) La forma de La población es desconocida (o no normal), $\sigma^2$ es conocida o desconocida y $n\geq30$.
+
+Entonces, la distribución muestral de la media muestral $\overline{x}$ es normal con media $\mu_{\overline{x}}$ y varianza $\sigma_{\overline{x}}^2$, calculadas a partir de la siguiente formula:
+
+$$Z=\frac{\overline{x}-\mu_{\overline{x}}}{\sigma_{\overline{x}}} $$
+
+### 5.1.2 Muestras pequeñas
+
+Si el muestro se hace en una población normal con varianza desconocida y si las muestras seleccionadas son de tamaño $n < 30$, entonces, la distribución muestral de la media muestral $\overline{x}$ es la de $t$ de $Student$ con $n-1$ grados de libertad. Por lo tanto, se utiliza la siguiente expresión:
+
+$$ t = \frac{\overline{x}-\mu_{\overline{x}}}{\sigma_{\overline{x}}}$$
+
+***Resumen***
+
+::: {style="text-align:center"}
+![](images/SDOE.png){width="626"}
+:::
+
+***Algunas observaciones para la media varianza muestrales***
+
+::: {style="text-align:center"}
+![](images/FDOE.png){width="520"}
+:::
+
+### 5.1.3 Ejemplos
+
+Antes de iniciar a revolver algunos ejemplos, les presento algunas funciones utiles para obtener los graficas y las probabilidades
+
+```{r funciones, echo=TRUE}
+
+## Funciones para graficar la probabilidad
+normal_area <- function(mean = 0, sd = 1, lb, ub, acolor = "lightgray", ...) {
+  x <- seq(mean - 3 * sd, mean + 3 * sd, length = 100) 
+  if (missing(lb)) {
+    lb <- min(x)
+  }
+  if (missing(ub)) {
+    ub <- max(x)
+  }
+  x2 <- seq(lb, ub, length = 100)    
+  plot(x, dnorm(x, mean, sd), type = "n", ylab = "")
+  y <- dnorm(x2, mean, sd)
+  polygon(c(lb, x2, ub), c(0, y, 0), col = acolor)
+  lines(x, dnorm(x, mean, sd), type = "l", ...)
+}
+
+## Funcion para t-stundet
+ts<-function(x,media,sd){
+  (x-media)/sd
+}
+```
+
+#### 5.1.3.1 Ejemplo 1
+
+<div style="text-align: justify">
+
+Suponga que el incremento porcentual de los salarios de los funcionarios de todas las corporaciones medianas se distribuye siguiendo una distribución normal con media 12.2% y desviación típica 3.6%. Si se toma una muestra aleatoria de nueve observaciones de esta población según los incrementos porcentuales de salario, ¿cuál es la probabilidad de que la media muestra sea mayor que 10%?
+
+**Datos**
+
+Media muestral: 12.2
+
+Desviación: 3.6
+
+n: 9
+
+Distribución: Normal
+
+**Solución**
+
+-   **Paso 1**: revisamos los supuestos, esto es:
+
+-   La distribución de probabilidad es normal? : **Si**
+
+-   La varianza poblacional es conocida? : **No**
+
+-   El tamaño de la muestra es grande: **Si**
+
+Por lo tanto, suponemos que $\overline{x}$ se distribuye con una distribución normal con
+
+$$Z=\frac{\overline{x}-\mu_{\overline{x}}}{\sigma_{\overline{x}}} $$
+
+-   **Paso 2**: Construimos la probabilidad solicitada, esto es:
+
+$$P(X>10)$$
+
+-   **Paso 3**: Usamos las funciones declaradas anteriormente, y el siguiente código:
+
+<div/>
+
+```{r Ejemplo 1, echo=TRUE}
+
+#Ejemplo 1
+
+media=12.2 # Ingresar dato
+varianza=3.6/sqrt(9) # Ingresar dato
+ValorProb =10 # Ingresar dato
+
+#####################################################################
+
+prob=pnorm( ValorProb, media, varianza, lower.tail = TRUE) 
+normal_area(mean = media, sd = varianza, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+text(x = media, y = 0.005,label = paste0("P-valor: ",round(prob,4)))
 
 ```
--->
-````
+
+-   **Paso 4:** Presetamos el resultado
+
+Como la función declarada siempre arroja la $P(X<x_0)$, entonces, si deseamos encontrar el resultado para este ejemplo en particular, debemos calcular el complemento de esta probabilidad, esto es:
+
+$$P(X>x_0) = 1- P(X<x_0)$$
+
+Por lo tanto, la probabilidad de que la media muestra sea mayor que 10% es:
+
+$$P(X>10) = 1- P(X<10)$$ $$P(X>10) = 1- 0.0334$$ $$P(X>10) = 0.9666$$
+
+
+#### 5.1.3.2 Ejemplo 2
+
+Suponga que de una población normal con media 20 se toma una muestra de 16. Si la desviación estándar muestral es 4, encuentre la probabilidad de que la media muestra sea estrictamente menor que 21.735.
+
+**Datos**
+
+Media muestral: 20
+
+Desviación: 4
+
+n: 16
+
+Distribución: Normal
+
+**Solución**
+
+-   **Paso 1**: revisamos los supuestos, esto es:
+
+-   La distribución de probabilidad es normal? : **Si**
+
+-   La varianza poblacional es conocida? : **No**
+
+-   El tamaño de la muestra es grande: **No**
+
+Por lo tanto, suponemos que $\overline{x}$ se distribuye con una t-student con $n-1$ grados de libertad:
+
+$$ t = \frac{\overline{x}-\mu_{\overline{x}}}{\sigma_{\overline{x}}}$$
+
+## 5.2 Intervalos de confiaza para diferencias de medias
