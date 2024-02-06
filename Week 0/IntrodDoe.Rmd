@@ -183,7 +183,7 @@ $$P(X>10)$$
 
 <div/>
 
-```{r Ejemplo 1, echo=TRUE}
+```{r Ejemplo1, echo=TRUE}
 
 #Ejemplo 1
 
@@ -195,7 +195,8 @@ ValorProb =10 # Ingresar dato
 
 prob=pnorm( ValorProb, media, varianza, lower.tail = TRUE) 
 normal_area(mean = media, sd = varianza, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
-text(x = media, y = 0.005,label = paste0("P-valor: ",round(prob,4)))
+y_coor=pnorm(media, media, varianza, lower.tail = TRUE)/2
+text(x = media, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
 
 ```
 
@@ -208,7 +209,6 @@ $$P(X>x_0) = 1- P(X<x_0)$$
 Por lo tanto, la probabilidad de que la media muestra sea mayor que 10% es:
 
 $$P(X>10) = 1- P(X<10)$$ $$P(X>10) = 1- 0.0334$$ $$P(X>10) = 0.9666$$
-
 
 #### 5.1.3.2 Ejemplo 2
 
@@ -236,6 +236,46 @@ Distribución: Normal
 
 Por lo tanto, suponemos que $\overline{x}$ se distribuye con una t-student con $n-1$ grados de libertad:
 
-$$ t = \frac{\overline{x}-\mu_{\overline{x}}}{\sigma_{\overline{x}}}$$
+$$ t = \frac{\overline{x}-\mu_{\overline{x}}}{\sigma_{\overline{x}}}$$ - **Paso 2**: Construimos la probabilidad solicitada, esto es:
+
+$$P(X<21.735)$$
+
+```{r Ejemplo2, echo=TRUE}
+
+#Ejemplo 2
+
+media=20 # Ingresar dato
+varianza=4/sqrt(16) # Ingresar dato
+ValorProb =21.735 # Ingresar dato
+Grados_libertad= 16-1 #Ingresar dato
+
+
+#####################################################################
+prob=pt(ts(ValorProb,media,varianza),Grados_libertad,lower.tail = TRUE)
+normal_area(mean = media, sd = varianza, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+y_coor=pt(ts(media,media,varianza),Grados_libertad,lower.tail = TRUE)/2
+text(x = media, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
+
+```
+
+-   **Paso 4:** Presetamos el resultado
+
+Como la función declarada siempre arroja la $P(X<x_0)$, entonces, la probabilidad de que la media muestra sea estrictamente menor que 21.735 es:
+
+$$P(X<27.735)=0.9484$$
+
+#### 5.1.3.2 Ejercicios propuestos
+
+-   Un fabricante declara que la duración de las bujías que el fabrica sigue una distribución normal con una media de 36000 kilómetros y una desviación estándar de 4000 kilómetros. Para una muestra aleatoria de dieciséis bujías, se obtuvo una duración media de 34500 km. Si a afirmación del fabricante es correcta, ¿ cuál es la probabilidad de obtener una media muestral tan pequeña como esta o menor?
+
+-   Un estudio de tránsito revela que el numero promedio de ocupantes de un auto es 1.75. En una muestra de 50 autos con desviación estándar 0.65, seleccionada de una población norma, encuentre la probabilidad de que un numero promedio de ocupante sea mayor que 2.
+
+-   Una muestra aleatoria de seis autos de un determinado modelo evidencia que cada uno de ellos consume las siguientes cantidades en kilómetros por litro:
+
+    ```         
+                            18.6     18.4    19.2     20.8    19.4      20.5
+    ```
+
+Determine la probabilidad de que el consumo de gasolina medio muestral de automóviles sea menor que 17.6km por litro, suponiendo que la distribución de la población es normal con media 17.
 
 ## 5.2 Intervalos de confiaza para diferencias de medias
