@@ -264,7 +264,7 @@ Como la función declarada siempre arroja la $P(X<x_0)$, entonces, la probabilid
 
 $$P(X<27.735)=0.9484$$
 
-#### 5.1.3.2 Ejercicios propuestos
+#### 5.1.3.3 Ejercicios propuestos
 
 -   Un fabricante declara que la duración de las bujías que el fabrica sigue una distribución normal con una media de 36000 kilómetros y una desviación estándar de 4000 kilómetros. Para una muestra aleatoria de dieciséis bujías, se obtuvo una duración media de 34500 km. Si a afirmación del fabricante es correcta, ¿ cuál es la probabilidad de obtener una media muestral tan pequeña como esta o menor?
 
@@ -276,6 +276,143 @@ $$P(X<27.735)=0.9484$$
                             18.6     18.4    19.2     20.8    19.4      20.5
     ```
 
-Determine la probabilidad de que el consumo de gasolina medio muestral de automóviles sea menor que 17.6km por litro, suponiendo que la distribución de la población es normal con media 17.
+    Determine la probabilidad de que el consumo de gasolina medio muestral de automóviles sea menor que 17.6km por litro, suponiendo que la distribución de la población es normal con media 17.
 
-## 5.2 Intervalos de confiaza para diferencias de medias
+-   En una fábrica de chocolates llamada "Sweet Delights", el equipo de calidad está llevando a cabo un estudio sobre el peso de las barras de chocolate producidas en una máquina específica. El equipo está interesado en determinar la distribución del peso medio de las barras de chocolate tomadas de muestras aleatorias de la producción diaria. Se sabe que el peso de las barras de chocolate sigue una distribución normal con una media poblacional de 100 gramos y una desviación estándar poblacional de 5 gramos. Supongamos que el equipo de calidad ha tomado una muestra aleatoria de 25 barras de chocolate hoy. Calcule la probabilidad de que el peso medio de estas barras de chocolate esté entre 98 y 102 gramos.
+
+## 5.2 Distribución muestral de la diferencia de medias
+
+::: {style="text-align:center"}
+![](images/DIF.png){width="577"}
+:::
+
+### 5.2.1 Muestras Dependientes (Pareadas)
+
+De manera general, si se toma una muestra aleataoria de $n$ pares de observaciones representradas por $(x_1,y_1), (x_2,y_2), ... , (x_n,y_n)$,procedentes de dos poblaciones con medias $\mu_1$ y $\mu_2$. De modo que,$x_1, x_2, ... , x_n$ corresponden a las observaciones muestrales de una población con media $\mu_1$ mientras que $y_1, y_2, ... , y_n$ corresponden a las observaciones muestrales de una población con media $\mu_2$.
+
+Ahora bien, si $d_i= x_i-y_i$, para cada $i=1,...,n$, entonces, la diferencias $d_1, d_2, ... d_n$ se pueden pensar como una muestra aleatoria de la población de diferencias de datos pareados. Con esto tenemos que si $\overline{x}$y $\overline{y}$ son las medias muestrales $x_1, x_2, ... , x_n$ y $y_1, y_2, ... , y_n$, entonces,la media $\overline{d}$ de las diferencias muestrales viene dada por $\overline{d}=\overline{x}-\overline{y}$ con lo cual lo podemos asociar con un estadístico $\overline{D}$, definido como la diferencia de medias muestrales $\overline{D}=\overline{X}-\overline{Y}$.
+
+En este sentido la media y varianza que se utilizan en este casos son:
+
+|               Estadístico                |               Media               |                  Varianza                   |
+|:-------------------------:|:---------------------:|:---------------------:|
+| $\overline{D}=\overline{X}-\overline{Y}$ | $\mu_{\overline{D}}= \mu_1-\mu_2$ | $\sigma_{\overline{D}}^2=\frac{s_{d}^2}{n}$ |
+
+Por lo tanto, la distribución muestral de $\overline{D}$ es la $t$ de Student con $n-1$ grados de libertad. Su expresión esta dada por:
+
+$$t=\frac{\overline{D}-\mu_{\overline{D}}}{\sigma_{\overline{D}}^2}$$\
+
+#### 5.2.1.1 Ejemplo 3
+
+Se recoge datos de consumo de gasolina correspondiente a una muestra aleatoria de 8 automoviles colombianos de dos modelos diferentes. Se forman pares con las dos muestras y cada elemento de un determinado par fue conducido por la misma ruta y por el mismo piloto.
+
+|                |      |      |      |      |      |      |      |      |
+|:--------------:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+| $x_i$ (auto A) | 19.4 | 18.8 | 20.6 | 17.6 | 19.2 | 20.9 | 18.3 | 20.4 |
+| $y_i$ (auto B) | 19.6 | 17.5 | 18.4 | 17.5 | 18.0 | 20.0 | 18.8 | 19.2 |
+
+-   Determine la media y la desviación muestral de las diferencias en el consumo de gasolina.
+
+-   Suponiendo que la distribución de la diferencial poblacional es normal con media -0.871, encuentre que el consumo promedio de gasolina del auto A sea mayor que el auto B.
+
+**Solución**
+
+Empezamos por calcular la direncia entre las muestras pareadas, esto es:
+
+```{r Ejemplo3, echo=TRUE}
+
+#Ejemplo 3
+
+xi=c(19.4,18.8,20.6,17.6,19.2,20.9,18.3,20.4)
+yi=c(19.6,17.5,18.4,17.5,18.0,20.0,18.8,19.2)
+
+
+#diferencia de muestras
+d=xi-yi
+d
+```
+
+Segundo, calculamos la media de las diferencias, esto es:
+
+$$\overline{d}= \frac{d_1+ ... + d_n}{n}$$
+
+```{r Ejemplo31, echo=TRUE}
+
+#promedio
+
+dprom=mean(d)
+dprom
+
+```
+
+Tercero, Calculamos la desviación, esto es:
+
+$$s_d= \sqrt{\frac{\sum d_i^2- n\overline{d}}{n-1}}$$
+
+```{r Ejemplo32, echo=TRUE}
+
+#Desviación
+
+ddes=sd(d)
+ddes
+
+```
+
+Ahora bien, para encontrar la $P(\overline{X_A}-\overline{X_B}>0)$. Hallamos $\overline{D}=\overline{X_A}-\overline{X_B}$. Por otra parte tenemos como dato que, la diferencial poblacional es normal con media $\mu_{\overline{D}}=-0.871$. Y la desviación de la media muestral es:
+
+$$\sigma_{\overline{D}}=\frac{s_d}{\sqrt{n}}$$ Reemplazando los datos, tenemos que:
+
+$$\sigma_{\overline{D}}=0.3413$$
+
+```{r Ejemplo33, echo=TRUE}
+
+#Desviación
+
+dm=ddes/sqrt(8)
+dm
+
+```
+
+Entonces, encontramos que,
+
+$$P(\overline{X_A}-\overline{X_B}>0)= P(\overline{D}>0) = P(t>\frac{0-\mu_{\overline{D}}}{\sigma_{\overline{D}}})$$ $$P(\frac{0-(-0.807)}{0.319})= P(t>2.526) = 1-P(t<2.526)$$ $$P(\overline{X_A}-\overline{X_B}>0)=1-0.9803=0.0197 \approx 0.02$$
+
+```{r Ejemplo34, echo=TRUE}
+
+#Ejemplo 2
+
+media=-0.807 # Ingresar dato
+varianza=0.903/sqrt(8) # Ingresar dato
+ValorProb =0 # Ingresar dato
+Grados_libertad= 8-1 #Ingresar dato
+
+
+#####################################################################
+prob=pt(ts(ValorProb,media,varianza),Grados_libertad,lower.tail = TRUE)
+normal_area(mean = media, sd = varianza, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+y_coor=pt(ts(media,media,varianza),Grados_libertad,lower.tail = TRUE)/2
+text(x = media, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
+
+```
+
+Por lo tanto, la probabilidad de que el consumo promedio de gasolina del auto A sea mayor que el auto B es aproximadamente 0.02.
+
+#### 5.2.1.2 Ejercicios propuestos
+
+-   En una línea de producción de alimentos envasados, se están evaluando dos métodos de sellado para bolsas de snacks. Se toma una muestra de 15 bolsas y se sella cada bolsa utilizando ambos métodos en diferentes partes de la bolsa. Después de realizar pruebas de integridad del sellado, se registra el número de bolsas que presentan fugas en cada método. Calcular la probabilidad de que la diferencia media en el número de bolsas con fugas entre los métodos de sellado sea menor que 1 bolsa. Supongamos que la diferencia media poblacional en el número de bolsas con fugas es de $\mu_{\overline{D}}=0.8$.
+
+|     |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
+|-----|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| M1  | 1.65 | 0.78 | 0.36 | 0.09 | 0.94 | 1.26 | 0.71 | 0.87 | 1.13 | 1.21 | 1.03 | 1.04 | 1.46 | 0.20 | 0.71 |
+| M2  | 0.99 | 1.64 | 0.93 | 0.65 | 0.93 | 0.44 | 1.08 | 1.45 | 1.23 | 1.14 | 0.31 | 0.85 | 0.69 | 1.04 | 0.41 |
+
+-   En una planta de producción de productos químicos, se están comparando dos métodos de fabricación para un nuevo producto. Se toma una muestra de 12 lotes de productos fabricados utilizando cada método. Después de realizar pruebas de calidad, se registra la concentración promedio de un componente clave en cada lote. Calcular la probabilidad de que la diferencia media en la concentración de componente clave entre los lotes fabricados con el primer método y los fabricados con el segundo método sea mayor que 0.1%. Supongamos que la diferencia media en la concentración del componente clave es de $\mu_{\overline{D}}=0.05\%$.
+
+    |     |      |      |      |      |      |      |      |      |      |      |      |      |
+    |:---:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+    | L1  | 0.09 | 0.04 | 0.08 | 0.07 | 0.03 | 0.07 | 0.07 | 0.04 | 0.03 | 0.09 | 0.04 | 0.07 |
+    | L2  | 0.06 | 0.07 | 0.05 | 0.08 | 0.08 | 0.05 | 0.02 | 0.05 | 0.05 | 0.03 | 0.08 | 0.05 |
+
+### 5.2.1 Muestras independientes 
+
+## 5.3 Intervalos de confiaza para diferencias de medias
