@@ -153,9 +153,9 @@ Suponga que el incremento porcentual de los salarios de los funcionarios de toda
 
 **Datos**
 
-Media muestral: 12.2
+Media poblacional: 12.2
 
-Desviación: 3.6
+Desviación poblacional: 3.6
 
 n: 9
 
@@ -167,9 +167,9 @@ Distribución: Normal
 
 -   La distribución de probabilidad es normal? : **Si**
 
--   La varianza poblacional es conocida? : **No**
+-   La varianza poblacional es conocida? : **Si**
 
--   El tamaño de la muestra es grande: **Si**
+-   El tamaño de la muestra es grande: **No**
 
 Por lo tanto, suponemos que $\overline{x}$ se distribuye con una distribución normal con
 
@@ -188,14 +188,14 @@ $$P(X>10)$$
 #Ejemplo 1
 
 media=12.2 # Ingresar dato
-varianza=3.6/sqrt(9) # Ingresar dato
+desviacion=3.6/sqrt(9) # Ingresar dato
 ValorProb =10 # Ingresar dato
 
 #####################################################################
 
-prob=pnorm( ValorProb, media, varianza, lower.tail = TRUE) 
-normal_area(mean = media, sd = varianza, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
-y_coor=pnorm(media, media, varianza, lower.tail = TRUE)/2
+prob=pnorm( ValorProb, media, desviacion, lower.tail = TRUE) 
+normal_area(mean = media, sd = desviacion, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+y_coor=pnorm(media, media, desviacion, lower.tail = TRUE)/2
 text(x = media, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
 
 ```
@@ -245,15 +245,15 @@ $$P(X<21.735)$$
 #Ejemplo 2
 
 media=20 # Ingresar dato
-varianza=4/sqrt(16) # Ingresar dato
+desviacion=4/sqrt(16) # Ingresar dato
 ValorProb =21.735 # Ingresar dato
 Grados_libertad= 16-1 #Ingresar dato
 
 
 #####################################################################
-prob=pt(ts(ValorProb,media,varianza),Grados_libertad,lower.tail = TRUE)
-normal_area(mean = media, sd = varianza, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
-y_coor=pt(ts(media,media,varianza),Grados_libertad,lower.tail = TRUE)/2
+prob=pt(ts(ValorProb,media,desviacion),Grados_libertad,lower.tail = TRUE)
+normal_area(mean = media, sd = desviacion, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+y_coor=pt(ts(media,media,desviacion),Grados_libertad,lower.tail = TRUE)/2
 text(x = media, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
 
 ```
@@ -382,15 +382,15 @@ $$P(\overline{X_A}-\overline{X_B}>0)= P(\overline{D}>0) = P(t>\frac{0-\mu_{\over
 #Ejemplo 2
 
 media=-0.807 # Ingresar dato
-varianza=0.903/sqrt(8) # Ingresar dato
+desviacion=0.903/sqrt(8) # Ingresar dato
 ValorProb =0 # Ingresar dato
 Grados_libertad= 8-1 #Ingresar dato
 
 
 #####################################################################
-prob=pt(ts(ValorProb,media,varianza),Grados_libertad,lower.tail = TRUE)
-normal_area(mean = media, sd = varianza, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
-y_coor=pt(ts(media,media,varianza),Grados_libertad,lower.tail = TRUE)/2
+prob=pt(ts(ValorProb,media,desviacion),Grados_libertad,lower.tail = TRUE)
+normal_area(mean = media, sd = desviacion, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+y_coor=pt(ts(media,media,desviacion),Grados_libertad,lower.tail = TRUE)/2
 text(x = media, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
 
 ```
@@ -413,6 +413,225 @@ Por lo tanto, la probabilidad de que el consumo promedio de gasolina del auto A 
     | L1  | 0.09 | 0.04 | 0.08 | 0.07 | 0.03 | 0.07 | 0.07 | 0.04 | 0.03 | 0.09 | 0.04 | 0.07 |
     | L2  | 0.06 | 0.07 | 0.05 | 0.08 | 0.08 | 0.05 | 0.02 | 0.05 | 0.05 | 0.03 | 0.08 | 0.05 |
 
-### 5.2.1 Muestras independientes 
+### 5.2.1 Muestras independientes
+
+Consideremos dos poblaciones de $\mu_1$ y $\mu_2$ y varianzas $\sigma_1^2$ y $\sigma_2^2$ representativas, luego se selecciona dos muestras aleatorias independientes de tamaño $n_1$ y $n_2$, con medias $\overline{x}_1$ y $\overline{x}_2$ y varianzas $s_1^2$ y $s_2^2$. Entonces, se consiste en determinar la distribución muestral de $\overline{X}_1-\overline{X}_2$. Para lo cual se siguen los siguientes casos:
+
+-   Las varianzas poblacionales son conocidas o desconocidas, pero las muestras son grandes.
+-   las varianzas poblacionales son desconocidas, pero iguales, y las muestras son pequeñas.
+-   Las varianzas poblacionales son desconocidas, pero diferentes, y las muestras son pequeñas.
+
+#### 5.2.1.1 Caso 1: Varianzas poblacionales conocidas o desconocidas y muestras grandes.
+
+Para este caso, se deben cumplir algunas de estas condiciones:
+
+-   Ambas poblaciones son normales y ambas varianzas poblacionales $\sigma_1^2$ y $\sigma_2^2$ son conocidas.
+-   Ambas poblaciones son desconocidas o no normales, ambas varianzas poblacionales $\sigma_1^2$ y $\sigma_2^2$ son conocidas o desconocidas y $n_1 \ge 30$ y $n_2 \ge 30$.
+
+Entonces la distribución de muestral del diferencia entre dos medias muestrales estará distribuida normalmente y se utiliza la siguiente formula:
+
+$$Z= \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}$$
+
+#### 5.2.1.2 Caso 2: Varianzas poblacionales desconocidas, iguales y muestras pequeñas.
+
+Si $\sigma_1^2$ y $\sigma_2^2$ son iguales y desconocidas, además, las poblaciones son normales y los tamaños de muestras son pequeños, entonces se utiliza la siguiente formula:
+
+$$t= \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s^2}{n_1}+\frac{s^2}{n_2}}}$$
+
+Donde la varianza muestral combinada esta dada por:
+
+$$s^2= \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$
+
+Distribuida según la distribución t-student con $n_1+n_2-2$ grados de libertad.
+
+#### 5.2.1.3 Caso 3: Varianzas poblacionales desconocidas, diferentes y muestras pequeñas.
+
+Si $\sigma_1^2$ y $\sigma_2^2$ son diferentes y desconocidas, además, las poblaciones son normales y los tamaños de muestras son pequeños, entonces se utiliza la siguiente formula:
+
+$$t= \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}$$ Distribuida según la distribución t-student con
+
+$$\nu = \frac{(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2})^2}{\frac{s_1^2/n_1}{n_1-1}+\frac{s_2^2/n_2}{n_2-1}}$$
+
+grados de libertad. Y, dado que. $\nu$ rara vez es un entero, se redondea al entero mas cercano.
+
+#### 5.2.1.4 Ejemplo 4
+
+Se lleva a cabo dos experimentos independientes en los que se comparan dos tipos de impresoras. Se imprimen, para el caso, 18 hojas con el tipo A y se registra el tiempo de secado en minutos de cada una. Lo mismo se hace con el tipo B. Se sabe que la desviación de la población es 1 en ambas. Suponga que el tiempo medio de secado es igual para los dos tipos de impresoras y encuentre $P(\overline{X}_A-\overline{X}_B> 1)$, donde $\overline{X}_A$ y $\overline{X}_B$ son los tiempos promedios de secado para las muestras de tamaño $n_A = n_B =18$. Suponga que las poblaciones son normales.
+
+**Datos**
+
+$n_1=n_2=18$
+
+$\sigma_1=\sigma_2= 1$
+
+$\mu_1=\mu_2$
+
+**Paso 1**: revisamos los supuestos, esto es:
+
+-   La distribución poblacional es normal? : **Si**
+
+-   Las varianzas poblacionales son conocidas? : **Si**
+
+-   Las varianzas poblacionales son iguales? : **Si**
+
+-   El tamaño de la muestra es grande: **No**
+
+Por lo tanto, suponemos que $\overline{X}_A-\overline{X}_B$ se distribuye con una distribución normal con
+
+$$Z= \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}$$
+
+**Paso 2**: Construimos la probabilidad solicitada, esto es:
+
+$$P(\overline{X}_A-\overline{X}_B> 1)$$
+
+**Paso 3**: Resolvemos la probabilidad
+
+1.  Matemáticamente
+
+$$P(\overline{X}_A-\overline{X}_B> 1) = 1-P(\overline{X}_A-\overline{X}_B< 1)$$ $$= 1-P(Z<\frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}})$$ 
+
+Ahora si reemplazando los datos, obtenemos:
+
+$$= 1-P(Z<\frac{(1)-(0)}{\sqrt{\frac{1^2}{18}+\frac{1^2}{18}}})$$ $$= 1-P(Z<3)=1-0.9987=0.0013$$
+
+2.  Usando R
+
+```{r Ejemplo4, echo=TRUE}
+
+#Ejemplo 4
+
+media1=0 # Ingresar dato
+media2=0 # Ingresar dato
+desviacion1=1 # Ingresar dato
+desviacion2=1 # Ingresar dato
+ValorProb =1 # Ingresar dato
+n1= 18# Ingresar dato
+n2= 18 # Ingresar dato
+
+#####################################################################
+
+desviacion=sqrt(desviacion1^2/n1+desviacion2^2/n2)
+prob=pnorm( ValorProb, media1-media2, desviacion, lower.tail = TRUE) 
+normal_area(mean = media1-media2, sd = desviacion, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+y_coor=pnorm(media1-media2, media1-media2, desviacion, lower.tail = TRUE)/4
+text(x = media1-media2, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
+
+```
+
+Recodemos que el codigo entrega la respuesta acumulada a la izquierda y el interronte del ejercicio nos pide el acomulado hacia a la derecha, por lo tanto,
+
+$$P(\overline{X}_A-\overline{X}_B> 1)=1-0.9987 = 0.0013 $$
+
+**Paso 4**: Presentamos la respuesta
+
+La probablidad de que la diferencia del tiempo de secado de las impresora A y B sea mayor que 1 es $0.13\%$
+
+#### 5.2.1.5 Ejemplo 5
+
+Suponga que dos drogas A y B de las que se dice que reducen el tiempo de respuesta de las ratas a determinado estimulo, se están comparando en un experimento de laboratorio. El experimentador sabe que en las respectivas poblaciones los tiempos de respuestas al estimulo están distribuidos normalmente. Se administra que la droga A a 12 ratas y B a 13 ratas. Cuando se lleva a cabo el experimento de reducción de promedio de tiempo de respuesta al estimulo por parte de las ratas que están recibiendo la droga A es 30,45 con una desviación típica de 5 milisegundos. Los datos correspondientes a las droga B son 24,9 y 6 milisegundos ¿Cuál es la probabilidad de que la diferencia entre la reducción promedio de respuesta al estimulo por parte de las ratas que están recibiendo la droga A y de las ratas que están recibiendo la droga B sea menor o igual a la observada en el experimento? Suponga que no hay diferencia alguna entre las dos drogas con respecto a la reducción promedio en tiempos de respuestas y que las drogas son igualmente efectivas. suponga que las varianzas poblacionales son iguales.
+
+**Datos**
+
+$n_1=12$
+
+$n_2=13$
+
+$s_1=5$
+
+$s_2=6$
+
+$\mu_1=\mu_2$
+
+$\overline{x}_1=30.45$
+
+$\overline{x}_2=24.9$
+
+**Paso 1**: revisamos los supuestos, esto es:
+
+-   La distribución poblacional es normal? : **Si**
+
+-   Las varianzas poblacionales son conocidas? : **No**
+
+-   Las varianzas poblacionales son iguales? : **Si**
+
+-   El tamaño de la muestra es grande: **Si**
+
+Por lo tanto, suponemos que $\overline{X}_A-\overline{X}_B$ se distribuye con una distribución normal con
+
+$$t= \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s^2}{n_1}+\frac{s^2}{n_2}}}$$
+
+Donde la varianza muestral combinada esta dada por:
+
+$$s^2= \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$$
+
+Y gardos de libertad $n_1+n_2-2$.
+
+**Paso 2**: Construimos la probabilidad solicitada, esto es:
+
+$$P(\overline{X}_A-\overline{X}_B \le 30.45-24.9=5.55)$$
+
+**Paso 3**: Resolvemos la probabilidad
+
+1.  Matemáticamente
+
+Primero, debemos encontrar la varianza muestral combinada, esto es:
+
+$$s^2= \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}= \frac{(12-1)5^2+(13-1)6^2}{12+13-2}=30.74$$
+Segundo, desarrollamos la probabilidad
+
+$$P(\overline{X}_A-\overline{X}_B \le 5.55) = 1-P(t> \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s^2}{n_1}+\frac{s^2}{n_2}}})$$ 
+
+$$ = 1-P(t> \frac{(5.55)-(0)}{\sqrt{\frac{30.74}{12}+\frac{30.74}{13}}})$$ 
+$$ = 1-P(t> 2.5)$$ 
+Ahora bien, los grados de libertad son $n_1+n_2-2=12=13-2=23$, el valor de tabla obtenido es 0.01:
+
+
+$$ P(\overline{X}_A-\overline{X}_B \le 5.55) = 1-0.01 =0.99$$ 
+
+
+2.  Usando R
+
+
+```{r Ejemplo5, echo=TRUE}
+
+#Ejemplo 4
+
+media1=0 # Ingresar dato
+media2=0 # Ingresar dato
+desviacion1=5 # Ingresar dato
+desviacion2=6 # Ingresar dato
+ValorProb =5.55 # Ingresar dato
+n1= 12# Ingresar dato
+n2= 13 # Ingresar dato
+
+#####################################################################
+Grados_libertad=n1+n2-2
+s_cua=((n1-1)*desviacion1^2+(n2-1)*desviacion2^2)/(n1+n2-2)
+desviacion=sqrt(s_cua/n1+s_cua/n2)
+prob=pt(ts(ValorProb,media1-media2,desviacion),Grados_libertad,lower.tail = TRUE)
+normal_area(mean = media1-media2, sd = desviacion, ub =ValorProb , acolor = rgb(0, 0, 1, alpha = 0.5))
+y_coor=pt(ts(media1-media2,media1-media2,desviacion),Grados_libertad,lower.tail = TRUE)/4
+text(x = media1-media2, y = y_coor,label = paste0("P-valor: ",round(prob,4)))
+```
+
+Recodemos que el codigo entrega la respuesta acumulada a la izquierda ypor lo tanto, la respuesta es 0.99001.
+
+**Paso 4**: Presentamos la respuesta
+
+La probabilidad de que la diferencia entre la reducción promedio de respuesta al estimulo por parte de las ratas que están recibiendo la droga A y de las ratas que están recibiendo la droga B sea menor o igual a la observada en el experimento es $99\%$.
+
+#### 5.2.1.5 Ejercicios propuestos
+
+- Las baterías del fabricante A tienen una duración media de 6.5 años y una desviación típica
+de 0.9 años, mientras que las del fabricante B tienen una duración media de 6.0 años y una varianza de 0.64 años. Asumiendo que los datos provienen de una distribución normal ¿Cuál es la probabilidad de que una muestra aleatoria de 18 baterías del fabricante A tengan una duración media que sea a lo sumo de dos años más que la duración media de una muestra de 22 baterías del fabricante B?
+
+- Suponga que cuando el pH de cierto compuesto químico es 5, el pH medido por un estudiante de quimica, seleccionado al azar en una jornada matutina, es una variable aleatoria con distribución normal con media 5 y desviación estándar 0.2.Luego, un lote grande del compuesto se subdivide y se da una muestra a cada estudiante de un laboratorio vispertino. Sea $\overline{X}$ el pH promedio medido por los alumnos de la mañana y $\overline{Y}$ el pH promedio medido por los alumnos de la tarde.
+
+a) Si el ph es una variable normal y hay 25 estudiantes en cada laboratorio, calcule $P(-0.1 \le \overline{X}-\overline{Y} \le 0.1)$
+
+b) Si hay 36 estudiantes en cada laboratorio, pero las determinaciones del ph no se suponen normales, calcule $P(-0.1 \le \overline{X}-\overline{Y} \le 0.1)$
+
+- Suponga que la duración esperada para una batería de tipo A es 150 horas y la desviación estándar es 8 horas. Para otra batería de tipo B, Suponga que laduración esperada y desviación estándar son respectivamente 100 y 6 horas. Sea $\overline{X}$  la duración promedio de una muestra aleatoria de 40 baterías de tipo A y sea $\overline{Y}$ la duración promedio de una muestra aleatoria de 35 baterías de tipo B. Calcule $P(148  \le \overline{X}-\overline{Y} \le 154)$
+
 
 ## 5.3 Intervalos de confiaza para diferencias de medias
