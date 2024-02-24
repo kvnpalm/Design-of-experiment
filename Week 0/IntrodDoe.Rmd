@@ -488,7 +488,7 @@ $$P(\overline{X}_A-\overline{X}_B> 1)$$
 
 1.  Matemáticamente
 
-$$P(\overline{X}_A-\overline{X}_B> 1) = 1-P(\overline{X}_A-\overline{X}_B< 1)$$ $$= 1-P(Z<\frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}})$$ 
+$$P(\overline{X}_A-\overline{X}_B> 1) = 1-P(\overline{X}_A-\overline{X}_B< 1)$$ $$= 1-P(Z<\frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}})$$
 
 Ahora si reemplazando los datos, obtenemos:
 
@@ -576,21 +576,15 @@ $$P(\overline{X}_A-\overline{X}_B \le 30.45-24.9=5.55)$$
 
 Primero, debemos encontrar la varianza muestral combinada, esto es:
 
-$$s^2= \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}= \frac{(12-1)5^2+(13-1)6^2}{12+13-2}=30.74$$
-Segundo, desarrollamos la probabilidad
+$$s^2= \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}= \frac{(12-1)5^2+(13-1)6^2}{12+13-2}=30.74$$ Segundo, desarrollamos la probabilidad
 
-$$P(\overline{X}_A-\overline{X}_B \le 5.55) = 1-P(t> \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s^2}{n_1}+\frac{s^2}{n_2}}})$$ 
+$$P(\overline{X}_A-\overline{X}_B \le 5.55) = 1-P(t> \frac{(\overline{x}_1-\overline{x}_2)-(\mu_1-\mu_2)}{\sqrt{\frac{s^2}{n_1}+\frac{s^2}{n_2}}})$$
 
-$$ = 1-P(t> \frac{(5.55)-(0)}{\sqrt{\frac{30.74}{12}+\frac{30.74}{13}}})$$ 
-$$ = 1-P(t> 2.5)$$ 
-Ahora bien, los grados de libertad son $n_1+n_2-2=12=13-2=23$, el valor de tabla obtenido es 0.01:
+$$ = 1-P(t> \frac{(5.55)-(0)}{\sqrt{\frac{30.74}{12}+\frac{30.74}{13}}})$$ $$ = 1-P(t> 2.5)$$ Ahora bien, los grados de libertad son $n_1+n_2-2=12=13-2=23$, el valor de tabla obtenido es 0.01:
 
-
-$$ P(\overline{X}_A-\overline{X}_B \le 5.55) = 1-0.01 =0.99$$ 
-
+$$ P(\overline{X}_A-\overline{X}_B \le 5.55) = 1-0.01 =0.99$$
 
 2.  Usando R
-
 
 ```{r Ejemplo5, echo=TRUE}
 
@@ -620,18 +614,179 @@ Recodemos que el codigo entrega la respuesta acumulada a la izquierda ypor lo ta
 
 La probabilidad de que la diferencia entre la reducción promedio de respuesta al estimulo por parte de las ratas que están recibiendo la droga A y de las ratas que están recibiendo la droga B sea menor o igual a la observada en el experimento es $99\%$.
 
-#### 5.2.1.5 Ejercicios propuestos
+#### 5.2.1.6 Ejercicios propuestos
 
-- Las baterías del fabricante A tienen una duración media de 6.5 años y una desviación típica
-de 0.9 años, mientras que las del fabricante B tienen una duración media de 6.0 años y una varianza de 0.64 años. Asumiendo que los datos provienen de una distribución normal ¿Cuál es la probabilidad de que una muestra aleatoria de 18 baterías del fabricante A tengan una duración media que sea a lo sumo de dos años más que la duración media de una muestra de 22 baterías del fabricante B?
+-   Las baterías del fabricante A tienen una duración media de 6.5 años y una desviación típica de 0.9 años, mientras que las del fabricante B tienen una duración media de 6.0 años y una varianza de 0.64 años. Asumiendo que los datos provienen de una distribución normal ¿Cuál es la probabilidad de que una muestra aleatoria de 18 baterías del fabricante A tengan una duración media que sea a lo sumo de dos años más que la duración media de una muestra de 22 baterías del fabricante B?
 
-- Suponga que cuando el pH de cierto compuesto químico es 5, el pH medido por un estudiante de quimica, seleccionado al azar en una jornada matutina, es una variable aleatoria con distribución normal con media 5 y desviación estándar 0.2.Luego, un lote grande del compuesto se subdivide y se da una muestra a cada estudiante de un laboratorio vispertino. Sea $\overline{X}$ el pH promedio medido por los alumnos de la mañana y $\overline{Y}$ el pH promedio medido por los alumnos de la tarde.
+-   Suponga que cuando el pH de cierto compuesto químico es 5, el pH medido por un estudiante de quimica, seleccionado al azar en una jornada matutina, es una variable aleatoria con distribución normal con media 5 y desviación estándar 0.2.Luego, un lote grande del compuesto se subdivide y se da una muestra a cada estudiante de un laboratorio vispertino. Sea $\overline{X}$ el pH promedio medido por los alumnos de la mañana y $\overline{Y}$ el pH promedio medido por los alumnos de la tarde.
 
-a) Si el ph es una variable normal y hay 25 estudiantes en cada laboratorio, calcule $P(-0.1 \le \overline{X}-\overline{Y} \le 0.1)$
+a)  Si el ph es una variable normal y hay 25 estudiantes en cada laboratorio, calcule $P(-0.1 \le \overline{X}-\overline{Y} \le 0.1)$
 
-b) Si hay 36 estudiantes en cada laboratorio, pero las determinaciones del ph no se suponen normales, calcule $P(-0.1 \le \overline{X}-\overline{Y} \le 0.1)$
+b)  Si hay 36 estudiantes en cada laboratorio, pero las determinaciones del ph no se suponen normales, calcule $P(-0.1 \le \overline{X}-\overline{Y} \le 0.1)$
 
-- Suponga que la duración esperada para una batería de tipo A es 150 horas y la desviación estándar es 8 horas. Para otra batería de tipo B, Suponga que laduración esperada y desviación estándar son respectivamente 100 y 6 horas. Sea $\overline{X}$  la duración promedio de una muestra aleatoria de 40 baterías de tipo A y sea $\overline{Y}$ la duración promedio de una muestra aleatoria de 35 baterías de tipo B. Calcule $P(148  \le \overline{X}-\overline{Y} \le 154)$
+-   Suponga que la duración esperada para una batería de tipo A es 150 horas y la desviación estándar es 8 horas. Para otra batería de tipo B, Suponga que laduración esperada y desviación estándar son respectivamente 100 y 6 horas. Sea $\overline{X}$ la duración promedio de una muestra aleatoria de 40 baterías de tipo A y sea $\overline{Y}$ la duración promedio de una muestra aleatoria de 35 baterías de tipo B. Calcule $P(148 \le \overline{X}-\overline{Y} \le 154)$
+
+## 5.3 Intervalos de confiaza para la media poblacional
+
+### 5.3.1 Caso para muestras grandes
+
+Supongamos que tenemos una muestra aleatoria de una distribución con media desconocida. El objetivo del intervalo de confianza es hallar un rango de valores para la media poblacional solo si se cumplen los siguientes supuestos:
+
+-   La población es normal con varianza ($\sigma^2$) conocida. No importa el tamaño de la muestra.
+-   La población es normal con varianza ($\sigma^2$) desconocida y el tamaño de la muestra es grande ($n \ge 30$).
+-   La forma de la población es no normal, su varianza ($\sigma^2$) es conocida o desconocida y el tamaño de la muestra es grande ($n \ge 30$).
+
+Entonces, el intervalo de confianza de $(1-\alpha)$ para $\mu$ es:
+
+$$\overline{x}-Z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \le \mu\le \overline{x}+Z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$ Nota:Si la población es finita de tamaño N y el muestro se hace sin reemplazo, se reemplaza $\frac{\sigma}{\sqrt{n}}$ por $\frac{\sigma}{\sqrt{n}}(\sqrt{\frac{N-n}{N-1}})$. Además, en los casos en que la varianza sea desconocida y $n \le 30$, reemplazamos la desviación poblacional $\sigma$ por la desviación muestral $s$.
+
+### 5.3.2 Caso para muestras pequeñas
+
+Este caso es cuando la población es normal y la varianza ($\sigma^2$) poblacional es desconocida y el tamaño de la muestra es pequena ($n \le 30$). Entonces, el intervalo de confianza de $(1-\alpha)$ para $\mu$ es:
+
+$$\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le \mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}$$ 
+
+Con $n-1$ grados de libertad.
+
+### 5.3.3 Ejemplo 6
+
+Un fabricante produce bolsas de arroz. El peso del contenido de estas bolsas tiene una distribución normal con desviación típica 15 gramos. A su vez, los contenidos de una muestra aleatoria de 25 bolsas tienen un peso medio de 100 gramos. Calcúlese un intervalo de confianza del 95% para el verdadero peso medio de todas las bolsas de arroz producidas por el fabricante.
+
+**Datos** 
+Desviación poblacional ($\sigma$) = 15 
+
+n = 25 
+
+Nivel de confianza = 95% 
+
+Media muestral ($\overline{x}$) = 100
+
+**Paso 1**: revisamos los supuestos, esto es:
+
+-   La distribución poblacional es normal? : **Si**
+
+-   La varianza poblacional es conocida? : **Si**
+
+-   El tamaño de la muestra es grande: **No**
+
+Por lo tanto, el el intervalo de nivel confianza de 95% para $\mu$ es:
+
+$$\overline{x}-Z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \le \mu\le \overline{x}+Z_{\alpha/2}\frac{\sigma}{\sqrt{n}}$$ **Paso 2**: Resolvemos la desigualdad.
+
+1.  Matemáticamente:
+
+Dado que el nivel de confianza (NF) es 95%, entonces $\alpha = 1- NF$, por lo tanto, $\alpha = 0.05$. Ahora buscamos en la tablas Z el valor de $\alpha/2=0.025$, el cual equivale a $Z_{\alpha/2}=1.96$.
+
+Ahora, reemplazamos todos los valores en la desigualdad:
+
+$$100-1.96\frac{15}{\sqrt{25}} \le \mu\le 100+1.96\frac{15}{\sqrt{25}}$$ $$94.14 \le \mu\le 105.88$$ 2. Usando R
+
+```{r Ejemplo6, echo=TRUE}
+
+#Ejemplo 6
+
+media=100 # Ingresar dato
+desviacion=15 # Ingresar dato
+n= 25 # Ingresar dato
+nivel_confianza=0.95 # Ingresar dato
 
 
-## 5.3 Intervalos de confiaza para diferencias de medias
+#####################################################################
+intervalo_confianza <- function(media, desviacion, n, nivel_confianza) {
+  error_estandar <- desviacion / sqrt(n)
+  margen_error <- qnorm(1 - (1 - nivel_confianza) / 2) * error_estandar
+  limite_inferior <- media - margen_error
+  limite_superior <- media + margen_error
+  return(c(limite_inferior, limite_superior))
+}
+intervalo_confianza(media, desviacion, n, nivel_confianza)
+
+```
+
+**Paso 3**: Presentamos la respuesta.
+
+El verdadero peso medio de todas las bolsas de arroz producidas por el fabricante esta entre: $$94.14 \le \mu\le 105.88$$ Con un nivel de confianza del 95%.
+
+### 5.3.4 Ejemplo 7
+
+Los contenidos de 7 recipientes similares de ácido sulfúrico son 9.8; 10.2; 10.4; 9.8; 10.0; 10.2 y 9.6 litros. Encuéntrese un intervalo de confianza del 95% para la media de todos los recipientes, suponiendo que la población de valores tiene distribución normal.
+
+**Datos** 
+
+Desviación muestral ($s$) = 0.283
+  
+n = 7 
+
+Nivel de confianza = 95% 
+
+Media muestral ($\overline{x}$) = 10
+
+
+**Paso 1**: revisamos los supuestos, esto es:
+
+-   La distribución poblacional es normal? : **Si**
+
+-   La varianza poblacional es conocida? : **No**
+
+-   El tamaño de la muestra es grande: **No**
+
+Por lo tanto, el el intervalo de nivel confianza de 95% para $\mu$ es:
+
+$$\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le \mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}$$ 
+
+Con $n-1$ grados de libertad.
+
+**Paso 2**: Resolvemos la desigualdad.
+
+1.  Matemáticamente:
+
+Dado que el nivel de confianza (NF) es 95%, entonces $\alpha = 1- NF$, por lo tanto, $\alpha = 0.05$. Ahora buscamos en la tablas t-student el valor de $\alpha/2=0.025$ con 6 grados de libertad, el cual equivale a $t_{\alpha/2}=2.447$.
+
+Ahora, reemplazamos todos los valores en la desigualdad:
+
+$$10-2.447\frac{0.283}{\sqrt{7}} \le \mu\le 10+2.447\frac{0.283}{\sqrt{7}}$$ 
+
+$$9.74 \le \mu\le 10.26$$ 
+
+2. Usando R
+
+```{r Ejemplo7, echo=TRUE}
+
+#Ejemplo 7
+
+media=10 # Ingresar dato
+desviacion=0.283 # Ingresar dato
+n= 7 # Ingresar dato
+nivel_confianza=0.95 # Ingresar dato
+
+
+#####################################################################
+intervalo_confianza_t <- function(media, desviacion, n, nivel_confianza) {
+  error_estandar <- desviacion / sqrt(n)
+  margen_error <- qt(1 - (1 - nivel_confianza) / 2, df = n - 1) * error_estandar
+  limite_inferior <- media - margen_error
+  limite_superior <- media + margen_error
+  return(c(limite_inferior, limite_superior))
+}
+intervalo_confianza_t(media, desviacion, n, nivel_confianza)
+
+```
+
+**Paso 3**: Presentamos la respuesta.
+
+La media de todos los recipientes esta entre:
+
+$$9.74 \le \mu\le 10.26$$ 
+
+Con un nivel de confianza del 95%.
+
+### Ejercicios propuestos
+
+- La dueña de un centro comercial desea estimar el promedio del valor de venta de los maletines que tiene en su inventario. Una muestra aleatoria de 12 maletines dio un valor promedio de 77.8 (en miles de pesos) y una desviación estándar de 11.1. Suponiendo que la población de precios se distribuye normalmente, calcule un intervalo de 95% de confianza para el valor de venta promedio de todos los maletines en cuestión.
+
+- El departamento de servicio al cliente de la compañía local de gas para viviendas desea estimar el periodo promedio entre la llegada de una solicitud de servicio y la conexión del mismo. Se seleccionó una muestra aleatoria de 6 casa a partir de los registros disponibles del año anterior. Los resultados registrados en número de días son: 150, 162, 178, 158, 162 y 171. Construya un intervalo del 90% de confianza del tiempo de espera
+promedio de la población durante el año pasado. Suponga que la población en cuestión se distribuye normalmente.
+
+- Un corredor de la Bolsa de Valores de Nueva York tiene curiosidad acerca del tiempo que transcurre entre la colocación de una orden de venta y su ejecución. El corredor hizo un muestreo de 45 órdenes y encontró que el tiempo medio para la ejecución fue 24.3 minutos, con desviación de 3.2 minutos. Ayude al corredor con la construcción de un intervalo de confianza del 95% para el tiempo medio transcurrido en la ejecución de una
+orden.
+

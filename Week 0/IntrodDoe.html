@@ -1199,7 +1199,7 @@ droga A y de las ratas que están recibiendo la droga B sea menor o igual
 a la observada en el experimento es <span class="math inline">\(99\%\)</span>.</p>
 </div>
 <div id="ejercicios-propuestos-2" class="section level4">
-<h4>5.2.1.5 Ejercicios propuestos</h4>
+<h4>5.2.1.6 Ejercicios propuestos</h4>
 <ul>
 <li><p>Las baterías del fabricante A tienen una duración media de 6.5
 años y una desviación típica de 0.9 años, mientras que las del
@@ -1238,8 +1238,190 @@ muestra aleatoria de 35 baterías de tipo B. Calcule <span class="math inline">\
 </div>
 </div>
 </div>
+<div id="intervalos-de-confiaza-para-la-media-poblacional" class="section level2">
+<h2>5.3 Intervalos de confiaza para la media poblacional</h2>
+<div id="caso-para-muestras-grandes" class="section level3">
+<h3>5.3.1 Caso para muestras grandes</h3>
+<p>Supongamos que tenemos una muestra aleatoria de una distribución con
+media desconocida. El objetivo del intervalo de confianza es hallar un
+rango de valores para la media poblacional solo si se cumplen los
+siguientes supuestos:</p>
+<ul>
+<li>La población es normal con varianza (<span class="math inline">\(\sigma^2\)</span>) conocida. No importa el tamaño
+de la muestra.</li>
+<li>La población es normal con varianza (<span class="math inline">\(\sigma^2\)</span>) desconocida y el tamaño de la
+muestra es grande (<span class="math inline">\(n \ge 30\)</span>).</li>
+<li>La forma de la población es no normal, su varianza (<span class="math inline">\(\sigma^2\)</span>) es conocida o desconocida y el
+tamaño de la muestra es grande (<span class="math inline">\(n \ge
+30\)</span>).</li>
+</ul>
+<p>Entonces, el intervalo de confianza de <span class="math inline">\((1-\alpha)\)</span> para <span class="math inline">\(\mu\)</span> es:</p>
+<p><span class="math display">\[\overline{x}-Z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+\le \mu\le \overline{x}+Z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]</span>
+Nota:Si la población es finita de tamaño N y el muestro se hace sin
+reemplazo, se reemplaza <span class="math inline">\(\frac{\sigma}{\sqrt{n}}\)</span> por <span class="math inline">\(\frac{\sigma}{\sqrt{n}}(\sqrt{\frac{N-n}{N-1}})\)</span>.
+Además, en los casos en que la varianza sea desconocida y <span class="math inline">\(n \le 30\)</span>, reemplazamos la desviación
+poblacional <span class="math inline">\(\sigma\)</span> por la
+desviación muestral <span class="math inline">\(s\)</span>.</p>
+</div>
+<div id="caso-para-muestras-pequeñas" class="section level3">
+<h3>5.3.2 Caso para muestras pequeñas</h3>
+<p>Este caso es cuando la población es normal y la varianza (<span class="math inline">\(\sigma^2\)</span>) poblacional es desconocida y el
+tamaño de la muestra es pequena (<span class="math inline">\(n \le
+30\)</span>). Entonces, el intervalo de confianza de <span class="math inline">\((1-\alpha)\)</span> para <span class="math inline">\(\mu\)</span> es:</p>
+<p><span class="math display">\[\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le
+\mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}\]</span></p>
+<p>Con <span class="math inline">\(n-1\)</span> grados de libertad.</p>
+</div>
+<div id="ejemplo-6" class="section level3">
+<h3>5.3.3 Ejemplo 6</h3>
+<p>Un fabricante produce bolsas de arroz. El peso del contenido de estas
+bolsas tiene una distribución normal con desviación típica 15 gramos. A
+su vez, los contenidos de una muestra aleatoria de 25 bolsas tienen un
+peso medio de 100 gramos. Calcúlese un intervalo de confianza del 95%
+para el verdadero peso medio de todas las bolsas de arroz producidas por
+el fabricante.</p>
+<p><strong>Datos</strong> Desviación poblacional (<span class="math inline">\(\sigma\)</span>) = 15</p>
+<p>n = 25</p>
+<p>Nivel de confianza = 95%</p>
+<p>Media muestral (<span class="math inline">\(\overline{x}\)</span>) =
+100</p>
+<p><strong>Paso 1</strong>: revisamos los supuestos, esto es:</p>
+<ul>
+<li><p>La distribución poblacional es normal? :
+<strong>Si</strong></p></li>
+<li><p>La varianza poblacional es conocida? :
+<strong>Si</strong></p></li>
+<li><p>El tamaño de la muestra es grande: <strong>No</strong></p></li>
+</ul>
+<p>Por lo tanto, el el intervalo de nivel confianza de 95% para <span class="math inline">\(\mu\)</span> es:</p>
+<p><span class="math display">\[\overline{x}-Z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+\le \mu\le \overline{x}+Z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]</span>
+<strong>Paso 2</strong>: Resolvemos la desigualdad.</p>
+<ol style="list-style-type: decimal">
+<li>Matemáticamente:</li>
+</ol>
+<p>Dado que el nivel de confianza (NF) es 95%, entonces <span class="math inline">\(\alpha = 1- NF\)</span>, por lo tanto, <span class="math inline">\(\alpha = 0.05\)</span>. Ahora buscamos en la
+tablas Z el valor de <span class="math inline">\(\alpha/2=0.025\)</span>, el cual equivale a <span class="math inline">\(Z_{\alpha/2}=1.96\)</span>.</p>
+<p>Ahora, reemplazamos todos los valores en la desigualdad:</p>
+<p><span class="math display">\[100-1.96\frac{15}{\sqrt{25}} \le \mu\le
+100+1.96\frac{15}{\sqrt{25}}\]</span> <span class="math display">\[94.14
+\le \mu\le 105.88\]</span> 2. Usando R</p>
+<pre class="r"><code>#Ejemplo 6
+
+media=100 # Ingresar dato
+desviacion=15 # Ingresar dato
+n= 25 # Ingresar dato
+nivel_confianza=0.95 # Ingresar dato
+
+
+#####################################################################
+intervalo_confianza &lt;- function(media, desviacion, n, nivel_confianza) {
+  error_estandar &lt;- desviacion / sqrt(n)
+  margen_error &lt;- qnorm(1 - (1 - nivel_confianza) / 2) * error_estandar
+  limite_inferior &lt;- media - margen_error
+  limite_superior &lt;- media + margen_error
+  return(c(limite_inferior, limite_superior))
+}
+intervalo_confianza(media, desviacion, n, nivel_confianza)</code></pre>
+<pre><code>## [1]  94.12011 105.87989</code></pre>
+<p><strong>Paso 3</strong>: Presentamos la respuesta.</p>
+<p>El verdadero peso medio de todas las bolsas de arroz producidas por
+el fabricante esta entre: <span class="math display">\[94.14 \le \mu\le
+105.88\]</span> Con un nivel de confianza del 95%.</p>
+</div>
+<div id="ejemplo-7" class="section level3">
+<h3>5.3.4 Ejemplo 7</h3>
+<p>Los contenidos de 7 recipientes similares de ácido sulfúrico son 9.8;
+10.2; 10.4; 9.8; 10.0; 10.2 y 9.6 litros. Encuéntrese un intervalo de
+confianza del 95% para la media de todos los recipientes, suponiendo que
+la población de valores tiene distribución normal.</p>
+<p><strong>Datos</strong></p>
+<p>Desviación muestral (<span class="math inline">\(s\)</span>) =
+0.283</p>
+<p>n = 7</p>
+<p>Nivel de confianza = 95%</p>
+<p>Media muestral (<span class="math inline">\(\overline{x}\)</span>) =
+10</p>
+<p><strong>Paso 1</strong>: revisamos los supuestos, esto es:</p>
+<ul>
+<li><p>La distribución poblacional es normal? :
+<strong>Si</strong></p></li>
+<li><p>La varianza poblacional es conocida? :
+<strong>No</strong></p></li>
+<li><p>El tamaño de la muestra es grande: <strong>No</strong></p></li>
+</ul>
+<p>Por lo tanto, el el intervalo de nivel confianza de 95% para <span class="math inline">\(\mu\)</span> es:</p>
+<p><span class="math display">\[\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le
+\mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}\]</span></p>
+<p>Con <span class="math inline">\(n-1\)</span> grados de libertad.</p>
+<p><strong>Paso 2</strong>: Resolvemos la desigualdad.</p>
+<ol style="list-style-type: decimal">
+<li>Matemáticamente:</li>
+</ol>
+<p>Dado que el nivel de confianza (NF) es 95%, entonces <span class="math inline">\(\alpha = 1- NF\)</span>, por lo tanto, <span class="math inline">\(\alpha = 0.05\)</span>. Ahora buscamos en la
+tablas t-student el valor de <span class="math inline">\(\alpha/2=0.025\)</span> con 6 grados de libertad,
+el cual equivale a <span class="math inline">\(t_{\alpha/2}=2.447\)</span>.</p>
+<p>Ahora, reemplazamos todos los valores en la desigualdad:</p>
+<p><span class="math display">\[10-2.447\frac{0.283}{\sqrt{7}} \le
+\mu\le 10+2.447\frac{0.283}{\sqrt{7}}\]</span></p>
+<p><span class="math display">\[9.74 \le \mu\le 10.26\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Usando R</li>
+</ol>
+<pre class="r"><code>#Ejemplo 7
+
+media=10 # Ingresar dato
+desviacion=0.283 # Ingresar dato
+n= 7 # Ingresar dato
+nivel_confianza=0.95 # Ingresar dato
+
+
+#####################################################################
+intervalo_confianza_t &lt;- function(media, desviacion, n, nivel_confianza) {
+  error_estandar &lt;- desviacion / sqrt(n)
+  margen_error &lt;- qt(1 - (1 - nivel_confianza) / 2, df = n - 1) * error_estandar
+  limite_inferior &lt;- media - margen_error
+  limite_superior &lt;- media + margen_error
+  return(c(limite_inferior, limite_superior))
+}
+intervalo_confianza_t(media, desviacion, n, nivel_confianza)</code></pre>
+<pre><code>## [1]  9.738269 10.261731</code></pre>
+<p><strong>Paso 3</strong>: Presentamos la respuesta.</p>
+<p>La media de todos los recipientes esta entre:</p>
+<p><span class="math display">\[9.74 \le \mu\le 10.26\]</span></p>
+<p>Con un nivel de confianza del 95%.</p>
+</div>
+<div id="ejercicios-propuestos-3" class="section level3">
+<h3>Ejercicios propuestos</h3>
+<ul>
+<li><p>La dueña de un centro comercial desea estimar el promedio del
+valor de venta de los maletines que tiene en su inventario. Una muestra
+aleatoria de 12 maletines dio un valor promedio de 77.8 (en miles de
+pesos) y una desviación estándar de 11.1. Suponiendo que la población de
+precios se distribuye normalmente, calcule un intervalo de 95% de
+confianza para el valor de venta promedio de todos los maletines en
+cuestión.</p></li>
+<li><p>El departamento de servicio al cliente de la compañía local de
+gas para viviendas desea estimar el periodo promedio entre la llegada de
+una solicitud de servicio y la conexión del mismo. Se seleccionó una
+muestra aleatoria de 6 casa a partir de los registros disponibles del
+año anterior. Los resultados registrados en número de días son: 150,
+162, 178, 158, 162 y 171. Construya un intervalo del 90% de confianza
+del tiempo de espera promedio de la población durante el año pasado.
+Suponga que la población en cuestión se distribuye normalmente.</p></li>
+<li><p>Un corredor de la Bolsa de Valores de Nueva York tiene curiosidad
+acerca del tiempo que transcurre entre la colocación de una orden de
+venta y su ejecución. El corredor hizo un muestreo de 45 órdenes y
+encontró que el tiempo medio para la ejecución fue 24.3 minutos, con
+desviación de 3.2 minutos. Ayude al corredor con la construcción de un
+intervalo de confianza del 95% para el tiempo medio transcurrido en la
+ejecución de una orden.</p></li>
+</ul>
+</div>
+</div>
 <div id="intervalos-de-confiaza-para-diferencias-de-medias" class="section level2">
-<h2>5.3 Intervalos de confiaza para diferencias de medias</h2>
+<h2>5.4 Intervalos de confiaza para diferencias de medias</h2>
 </div>
 </div>
 
