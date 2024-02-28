@@ -295,7 +295,7 @@ Ahora bien, si $d_i= x_i-y_i$, para cada $i=1,...,n$, entonces, la diferencias $
 En este sentido la media y varianza que se utilizan en este casos son:
 
 |               Estadístico                |               Media               |                  Varianza                   |
-|:----------------------------------------:|:---------------------------------:|:-------------------------------------------:|
+|:-------------------------:|:---------------------:|:---------------------:|
 | $\overline{D}=\overline{X}-\overline{Y}$ | $\mu_{\overline{D}}= \mu_1-\mu_2$ | $\sigma_{\overline{D}}^2=\frac{s_{d}^2}{n}$ |
 
 Por lo tanto, la distribución muestral de $\overline{D}$ es la $t$ de Student con $n-1$ grados de libertad. Su expresión esta dada por:
@@ -402,7 +402,7 @@ Por lo tanto, la probabilidad de que el consumo promedio de gasolina del auto A 
 -   En una línea de producción de alimentos envasados, se están evaluando dos métodos de sellado para bolsas de snacks. Se toma una muestra de 15 bolsas y se sella cada bolsa utilizando ambos métodos en diferentes partes de la bolsa. Después de realizar pruebas de integridad del sellado, se registra el número de bolsas que presentan fugas en cada método. Calcular la probabilidad de que la diferencia media en el número de bolsas con fugas entre los métodos de sellado sea menor que 1 bolsa. Supongamos que la diferencia media poblacional en el número de bolsas con fugas es de $\mu_{\overline{D}}=0.8$.
 
 |     |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
-|-----|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
+|-----|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | M1  | 1.65 | 0.78 | 0.36 | 0.09 | 0.94 | 1.26 | 0.71 | 0.87 | 1.13 | 1.21 | 1.03 | 1.04 | 1.46 | 0.20 | 0.71 |
 | M2  | 0.99 | 1.64 | 0.93 | 0.65 | 0.93 | 0.44 | 1.08 | 1.45 | 1.23 | 1.14 | 0.31 | 0.85 | 0.69 | 1.04 | 0.41 |
 

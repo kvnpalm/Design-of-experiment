@@ -716,7 +716,7 @@ son:</p>
 </table>
 <p>Por lo tanto, la distribución muestral de <span class="math inline">\(\overline{D}\)</span> es la <span class="math inline">\(t\)</span> de Student con <span class="math inline">\(n-1\)</span> grados de libertad. Su expresión esta
 dada por:</p>
-<p><span class="math display">\[t=\frac{\overline{D}-\mu_{\overline{D}}}{\sigma_{\overline{D}}^2}\]</span><br />
+<p><span class="math display">\[t=\frac{\overline{D}-\mu_{\overline{D}}}{\sigma_{\overline{D}}}\]</span><br />
 </p>
 <div id="ejemplo-3" class="section level4">
 <h4>5.2.1.1 Ejemplo 3</h4>
@@ -792,8 +792,8 @@ dprom=mean(d)
 dprom</code></pre>
 <pre><code>## [1] 0.775</code></pre>
 <p>Tercero, Calculamos la desviación, esto es:</p>
-<p><span class="math display">\[s_d= \sqrt{\frac{\sum d_i^2-
-n\overline{d}}{n-1}}\]</span></p>
+<p><span class="math display">\[s_d= \sqrt{\frac{\sum (d_i-
+\overline{d})^2}{n-1}}\]</span></p>
 <pre class="r"><code>#Desviación
 
 ddes=sd(d)
@@ -816,8 +816,8 @@ dm</code></pre>
 <p><span class="math display">\[P(\overline{X_A}-\overline{X_B}&gt;0)=
 P(\overline{D}&gt;0) =
 P(t&gt;\frac{0-\mu_{\overline{D}}}{\sigma_{\overline{D}}})\]</span>
-<span class="math display">\[P(\frac{0-(-0.807)}{0.319})= P(t&gt;2.526)
-= 1-P(t&lt;2.526)\]</span> <span class="math display">\[P(\overline{X_A}-\overline{X_B}&gt;0)=1-0.9803=0.0197
+<span class="math display">\[P(\frac{0-(-0.871)}{0.319})= P(t&gt;2.72) =
+1-P(t&lt;2.72)\]</span> <span class="math display">\[P(\overline{X_A}-\overline{X_B}&gt;0)=1-0.9803=0.0197
 \approx 0.02\]</span></p>
 <pre class="r"><code>#Ejemplo 2
 
