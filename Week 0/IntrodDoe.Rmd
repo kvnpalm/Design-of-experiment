@@ -295,12 +295,12 @@ Ahora bien, si $d_i= x_i-y_i$, para cada $i=1,...,n$, entonces, la diferencias $
 En este sentido la media y varianza que se utilizan en este casos son:
 
 |               Estadístico                |               Media               |                  Varianza                   |
-|:-------------------------:|:---------------------:|:---------------------:|
+|:----------------------------------------:|:---------------------------------:|:-------------------------------------------:|
 | $\overline{D}=\overline{X}-\overline{Y}$ | $\mu_{\overline{D}}= \mu_1-\mu_2$ | $\sigma_{\overline{D}}^2=\frac{s_{d}^2}{n}$ |
 
 Por lo tanto, la distribución muestral de $\overline{D}$ es la $t$ de Student con $n-1$ grados de libertad. Su expresión esta dada por:
 
-$$t=\frac{\overline{D}-\mu_{\overline{D}}}{\sigma_{\overline{D}}^2}$$\
+$$t=\frac{\overline{D}-\mu_{\overline{D}}}{\sigma_{\overline{D}}}$$\
 
 #### 5.2.1.1 Ejemplo 3
 
@@ -347,7 +347,7 @@ dprom
 
 Tercero, Calculamos la desviación, esto es:
 
-$$s_d= \sqrt{\frac{\sum d_i^2- n\overline{d}}{n-1}}$$
+$$s_d= \sqrt{\frac{\sum (d_i- \overline{d})^2}{n-1}}$$
 
 ```{r Ejemplo32, echo=TRUE}
 
@@ -375,7 +375,7 @@ dm
 
 Entonces, encontramos que,
 
-$$P(\overline{X_A}-\overline{X_B}>0)= P(\overline{D}>0) = P(t>\frac{0-\mu_{\overline{D}}}{\sigma_{\overline{D}}})$$ $$P(\frac{0-(-0.807)}{0.319})= P(t>2.526) = 1-P(t<2.526)$$ $$P(\overline{X_A}-\overline{X_B}>0)=1-0.9803=0.0197 \approx 0.02$$
+$$P(\overline{X_A}-\overline{X_B}>0)= P(\overline{D}>0) = P(t>\frac{0-\mu_{\overline{D}}}{\sigma_{\overline{D}}})$$ $$P(\frac{0-(-0.871)}{0.319})= P(t>2.72) = 1-P(t<2.72)$$ $$P(\overline{X_A}-\overline{X_B}>0)=1-0.9803=0.0197 \approx 0.02$$
 
 ```{r Ejemplo34, echo=TRUE}
 
@@ -402,7 +402,7 @@ Por lo tanto, la probabilidad de que el consumo promedio de gasolina del auto A 
 -   En una línea de producción de alimentos envasados, se están evaluando dos métodos de sellado para bolsas de snacks. Se toma una muestra de 15 bolsas y se sella cada bolsa utilizando ambos métodos en diferentes partes de la bolsa. Después de realizar pruebas de integridad del sellado, se registra el número de bolsas que presentan fugas en cada método. Calcular la probabilidad de que la diferencia media en el número de bolsas con fugas entre los métodos de sellado sea menor que 1 bolsa. Supongamos que la diferencia media poblacional en el número de bolsas con fugas es de $\mu_{\overline{D}}=0.8$.
 
 |     |      |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
-|-----|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|-----|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
 | M1  | 1.65 | 0.78 | 0.36 | 0.09 | 0.94 | 1.26 | 0.71 | 0.87 | 1.13 | 1.21 | 1.03 | 1.04 | 1.46 | 0.20 | 0.71 |
 | M2  | 0.99 | 1.64 | 0.93 | 0.65 | 0.93 | 0.44 | 1.08 | 1.45 | 1.23 | 1.14 | 0.31 | 0.85 | 0.69 | 1.04 | 0.41 |
 
@@ -644,7 +644,7 @@ $$\overline{x}-Z_{\alpha/2}\frac{\sigma}{\sqrt{n}} \le \mu\le \overline{x}+Z_{\a
 
 Este caso es cuando la población es normal y la varianza ($\sigma^2$) poblacional es desconocida y el tamaño de la muestra es pequena ($n \le 30$). Entonces, el intervalo de confianza de $(1-\alpha)$ para $\mu$ es:
 
-$$\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le \mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}$$ 
+$$\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le \mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}$$
 
 Con $n-1$ grados de libertad.
 
@@ -652,12 +652,11 @@ Con $n-1$ grados de libertad.
 
 Un fabricante produce bolsas de arroz. El peso del contenido de estas bolsas tiene una distribución normal con desviación típica 15 gramos. A su vez, los contenidos de una muestra aleatoria de 25 bolsas tienen un peso medio de 100 gramos. Calcúlese un intervalo de confianza del 95% para el verdadero peso medio de todas las bolsas de arroz producidas por el fabricante.
 
-**Datos** 
-Desviación poblacional ($\sigma$) = 15 
+**Datos** Desviación poblacional ($\sigma$) = 15
 
-n = 25 
+n = 25
 
-Nivel de confianza = 95% 
+Nivel de confianza = 95%
 
 Media muestral ($\overline{x}$) = 100
 
@@ -711,16 +710,15 @@ El verdadero peso medio de todas las bolsas de arroz producidas por el fabricant
 
 Los contenidos de 7 recipientes similares de ácido sulfúrico son 9.8; 10.2; 10.4; 9.8; 10.0; 10.2 y 9.6 litros. Encuéntrese un intervalo de confianza del 95% para la media de todos los recipientes, suponiendo que la población de valores tiene distribución normal.
 
-**Datos** 
+**Datos**
 
 Desviación muestral ($s$) = 0.283
-  
-n = 7 
 
-Nivel de confianza = 95% 
+n = 7
+
+Nivel de confianza = 95%
 
 Media muestral ($\overline{x}$) = 10
-
 
 **Paso 1**: revisamos los supuestos, esto es:
 
@@ -732,7 +730,7 @@ Media muestral ($\overline{x}$) = 10
 
 Por lo tanto, el el intervalo de nivel confianza de 95% para $\mu$ es:
 
-$$\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le \mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}$$ 
+$$\overline{x}-t_{\alpha/2}\frac{s}{\sqrt{n}} \le \mu\le \overline{x}+t_{\alpha/2}\frac{s}{\sqrt{n}}$$
 
 Con $n-1$ grados de libertad.
 
@@ -744,11 +742,11 @@ Dado que el nivel de confianza (NF) es 95%, entonces $\alpha = 1- NF$, por lo ta
 
 Ahora, reemplazamos todos los valores en la desigualdad:
 
-$$10-2.447\frac{0.283}{\sqrt{7}} \le \mu\le 10+2.447\frac{0.283}{\sqrt{7}}$$ 
+$$10-2.447\frac{0.283}{\sqrt{7}} \le \mu\le 10+2.447\frac{0.283}{\sqrt{7}}$$
 
-$$9.74 \le \mu\le 10.26$$ 
+$$9.74 \le \mu\le 10.26$$
 
-2. Usando R
+2.  Usando R
 
 ```{r Ejemplo7, echo=TRUE}
 
@@ -776,17 +774,14 @@ intervalo_confianza_t(media, desviacion, n, nivel_confianza)
 
 La media de todos los recipientes esta entre:
 
-$$9.74 \le \mu\le 10.26$$ 
+$$9.74 \le \mu\le 10.26$$
 
 Con un nivel de confianza del 95%.
 
 ### Ejercicios propuestos
 
-- La dueña de un centro comercial desea estimar el promedio del valor de venta de los maletines que tiene en su inventario. Una muestra aleatoria de 12 maletines dio un valor promedio de 77.8 (en miles de pesos) y una desviación estándar de 11.1. Suponiendo que la población de precios se distribuye normalmente, calcule un intervalo de 95% de confianza para el valor de venta promedio de todos los maletines en cuestión.
+-   La dueña de un centro comercial desea estimar el promedio del valor de venta de los maletines que tiene en su inventario. Una muestra aleatoria de 12 maletines dio un valor promedio de 77.8 (en miles de pesos) y una desviación estándar de 11.1. Suponiendo que la población de precios se distribuye normalmente, calcule un intervalo de 95% de confianza para el valor de venta promedio de todos los maletines en cuestión.
 
-- El departamento de servicio al cliente de la compañía local de gas para viviendas desea estimar el periodo promedio entre la llegada de una solicitud de servicio y la conexión del mismo. Se seleccionó una muestra aleatoria de 6 casa a partir de los registros disponibles del año anterior. Los resultados registrados en número de días son: 150, 162, 178, 158, 162 y 171. Construya un intervalo del 90% de confianza del tiempo de espera
-promedio de la población durante el año pasado. Suponga que la población en cuestión se distribuye normalmente.
+-   El departamento de servicio al cliente de la compañía local de gas para viviendas desea estimar el periodo promedio entre la llegada de una solicitud de servicio y la conexión del mismo. Se seleccionó una muestra aleatoria de 6 casa a partir de los registros disponibles del año anterior. Los resultados registrados en número de días son: 150, 162, 178, 158, 162 y 171. Construya un intervalo del 90% de confianza del tiempo de espera promedio de la población durante el año pasado. Suponga que la población en cuestión se distribuye normalmente.
 
-- Un corredor de la Bolsa de Valores de Nueva York tiene curiosidad acerca del tiempo que transcurre entre la colocación de una orden de venta y su ejecución. El corredor hizo un muestreo de 45 órdenes y encontró que el tiempo medio para la ejecución fue 24.3 minutos, con desviación de 3.2 minutos. Ayude al corredor con la construcción de un intervalo de confianza del 95% para el tiempo medio transcurrido en la ejecución de una
-orden.
-
+-   Un corredor de la Bolsa de Valores de Nueva York tiene curiosidad acerca del tiempo que transcurre entre la colocación de una orden de venta y su ejecución. El corredor hizo un muestreo de 45 órdenes y encontró que el tiempo medio para la ejecución fue 24.3 minutos, con desviación de 3.2 minutos. Ayude al corredor con la construcción de un intervalo de confianza del 95% para el tiempo medio transcurrido en la ejecución de una orden.
