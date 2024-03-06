@@ -1,0 +1,205 @@
+---
+title: "Diseño de experimento con un solo factor"
+author: "Kevin Palomino"
+date: "2024-03-05"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Un diseño de experimento de un solo factor es un tipo de estudio
+experimental en el que se analiza la influencia de un único factor sobre
+una variable de respuesta. Este factor se define como la variable
+independiente, mientras que la variable de respuesta es la variable
+dependiente.
+
+**Conceptos básicos**
+
+-   Factores: Fenómenos que potencialmente causan variación y que se
+    pueden fijar en un valor dado.
+-   Niveles: Valores que un factor puede tomar.
+-   Tratamieto: Combinación de niveles de todos los factores
+    involucrados en el experimento.
+-   Variable de respuesta: Se mide el efecto del factor sobre una
+    variable dependiente.
+-   Experimento balanceado: Experimento en que todos los niveles
+    aparecen el mismo número de veces.
+
+# Análisis de varianza (ANOVA)
+
+Es una técnica estadística que se utiliza en el diseño de experimentos
+(DOE) para comparar las medias de dos o más grupos. En un DOE de un
+factor, se analiza la influencia de un **único factor** sobre una
+variable de respuesta.
+
+**Objetivo:**
+
+-   Evaluar si existe una diferencia significativa entre las medias de
+    los diferentes niveles del factor.
+-   Determinar si el factor tiene un efecto significativo sobre la
+    variable de respuesta.
+
+**Componentes del ANOVA:**
+
+-   Factor: Variable independiente que se modifica en el experimento.
+-   Niveles: Categorías o valores específicos del factor.
+-   Variable de respuesta: Variable dependiente que se mide en el
+    experimento.
+-   Modelo lineal: Se utiliza para describir la relación entre el factor
+    y la variable de respuesta.
+-   Suma de cuadrados: Mide la variabilidad dentro y entre los grupos.
+-   Grados de libertad: Indica el número de valores independientes en
+    cada conjunto de datos.
+-   Media cuadrática: Estima la varianza dentro y entre los grupos.
+-   Razón F: Se utiliza para comparar la varianza entre los grupos con
+    la varianza dentro de los grupos.
+-   Valor p: Indica la probabilidad de obtener una razón F tan grande o
+    más grande por casualidad.
+
+**Interpretación de resultados:**
+
+-   Si el valor p es menor que el nivel de significancia ($\alpha$), se
+    rechaza la hipótesis nula y se concluye que existe una diferencia
+    significativa entre las medias de los diferentes niveles del factor.
+
+-   Si el valor p es mayor que el nivel de significancia ($\alpha$), no
+    se rechaza la hipótesis nula y no se puede concluir que existe una
+    diferencia significativa.
+
+[***Se comparan medias pero se usan las varianzas ...***]{.underline}
+
+<div style="text-align: justify">
+
+La idea general de esta técnica es separar la variación total en las
+partes con las que contribuye cada fuente de variación en el
+experimento. En este sentido, se separan la variabilidad debida a los
+tratamientos y la debida al error. Cuando la primera predomina
+“claramente” sobre la segunda, es cuando se concluye que los
+tratamientos tienen efecto, o dicho de otra manera, las medias son
+diferentes. Cuando los tratamientos no dominan (contribuyen igual o
+menos que el error), se concluye que las medias son iguales, es decir,
+no tiene efecto.
+
+<div/>
+
+::: {style="text-align:center"}
+![](images/var.png){width="558"}
+:::
+
+Ahora bien, el objetivo del análisis de varianza es probar la hipótesis
+de igualdad de los tratamientos con respecto a la media de la
+correspondiente variable de respuesta:
+
+$$ H_0: \mu_1=\mu_2 = ... = \mu_n = \mu$$
+$$H_1: \mu_i \neq \mu_j  \text{    para algún      } i \neq j$$ la cual
+se puede escribir en forma equivalente en forma de efecto como:
+
+$$ H_0: \tau_1=\tau_2 = ... = \tau_k = 0$$
+$$H_1: \tau_i \neq 0  \text{    para algún      } i$$ donde $\tau_i$ es
+el efecto del tratamiento $i$ sobre la variable de respuesta. Si se
+acepta $H_0$, se confirma que los efectos sobre la respuesta de los $k$
+tratamientos son estadísticamente nulos (iguales a cero), y en caso de
+rechazar se estaría concluyendo que al menos un efecto es diferente de
+cero.
+
+Ahora bien, si comparamos las hipótesis para la media y para los efectos
+se deduce que:
+
+$$ \mu_i - \mu =\tau_i\  \ \ \ \ \ \  \ \forall i$$
+
+Lo cual representa el efecto del tratamiento $i$,esto es la distancia
+entre la respuesta media del tratamiento, $\mu_i$, y la respuesta media
+global, $\mu$; y cuando un efecto es igual a cero, equivale a decir que
+la media del tratamiento correspondiente es igual a la media global.
+Así, se observa que para que todas las respuestas medias de tratamientos
+sean iguales a la respuesta media global, $\mu$, representada por la
+línea horizontal, se requiere que todos los efectos $\tau_i$ sean
+iguales a cero.
+
+::: {style="text-align:center"}
+![](images/tau.png){width="435"}
+:::
+
+Para probar la hipótesis planteandas mediante la técnica de ANOVA, se
+debe separar la variabilidad total de los datos. Para ello se tiene que
+una medida de la variabilidad total presente en las observaciones de la
+siguiente tabla:
+
+::: {style="text-align:center"}
+![](images/tabla.png){width="445"}
+:::
+
+Es la suma total de cuadrados dada por:
+
+$$SST=\sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2=\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{ij}-\frac{y^2_{..}}{N} $$
+
+Por lo tanto, la partición de la variabilidad global es:
+
+$$\sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2=n_i\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2+\sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{i.})^2 $$
+
+Donde el primer componente es la suma de cuadrados de tratamientos
+($SS_{Tratamiento}$) y el segundo es la suma de cuadrados del error
+($SSE$). Al observar con detalle estas sumas de cuadrados, se aprecia
+que la $SS_{Tratamiento}$ mide la variación o diferencias entre
+tratamientos, ya que si éstos son muy diferentes entre sí, entonces la
+diferencia $y_{i.}-\overline{y}_{..}$ tenderá a ser grande en valor
+absoluto, y con ello también será grande la $SS_{Tratamiento}$. Por su
+parte, la $SSE$ mide la variación dentro de tratamientos, ya que si hay
+mucha variación entre las observaciones de cada tratamiento, entonces
+$y_{ij}-\overline{y}_{i.}$ tenderá a ser grande en valor absoluto. En
+forma abreviada, esta descomposición de la suma total de cuadrados se
+puede escribir como:
+
+$$SST = SS_{Tratamiento}+SS_E$$
+
+Como hay un total de N observaciones, la $SST$ tiene $N – 1$ grados de
+libertad. Hay $a$ tratamientos o niveles del factor de interés, así que
+$SS_{Tratamiento}$ tiene $a – 1$ grados de libertad, mientras que la
+$SS_E$ tiene $N – a$.
+
+Por otra parte, las sumas de cuadrados divididas entre sus respectivos
+grados de libertad se llaman cuadrados medios, y es una estimación de la
+magnitud de su correspondiente fuente de variabilidad. Los dos que más
+interesan son el cuadrado medio de tratamientos y el cuadrado medio del
+error, que se denotan por:
+
+$$MS_{tratamiento}=\frac{SS_{Tratamiento}}{a-1}$$ y,
+$$MS_{E}=\frac{SS_E}{N-a}$$ Los valores esperados de los cuadrados
+medios están dados por:
+
+$$E(MS_E)=\sigma^2$$ y,
+
+$$E(MS_{tratamiento})=\sigma^2+\frac{\sum_{i=1}^{a}n_i*\tau^2_i}{N-a}$$
+
+<div style="text-align: justify">
+
+En estas expresiones se aprecia que cuando la hipótesis nula es
+verdadera, ambos cuadrados medios estiman la varianza $\sigma^2$, ya que
+el segundo término de la expresión para el $E(MS_{tratamiento})$ sería
+igual a cero. Con base en este hecho se construye el estadístico de
+prueba como sigue:
+
+$$F_0=\frac{MS_{tratamiento}}{MS_E}$$ La cual sigue una distribución $F$
+de fisher con $(a – 1)$ grados de libertad en el numerador y $(N – a)$
+grados de libertad en el denominador. Donde se deduce que si $F_0$ es
+grande, se contradice la hipótesis de que no hay efectos de
+tratamientos; en cambio, si $F_0$ es pequeño, se confirma la validez de
+$H_0$. Así, para un nivel de significancia predefinido, se rechaza $H_0$
+si $F_0 > F_{\alpha, a -1, N – a}$, donde $F_{\alpha, a -1, N – a}$ es
+el percentil $(1 – \alpha) *100$ de la distribución F. También se
+rechaza $H_0$ si el $valor-p < \alpha$, donde el valor-p es el área bajo
+la distribución $F_{a -1, N – a}$ a la derecha del estadístico $F_0$, es
+decir, el valor-p = $P(F > F_0)$ es la significancia observada. Las
+fórmulas simplificadas para calcular el estadístico $F_0$ hasta llegar
+al valor-p se escribe en la llamada tabla de análisis de varianza
+(ANOVA) que se muestra en la siguiente tabla:
+
+<div/>
+::: {style="text-align:center"}
+![](images/anova.png){width="544"}
+:::

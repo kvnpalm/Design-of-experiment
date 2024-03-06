@@ -295,7 +295,7 @@ Ahora bien, si $d_i= x_i-y_i$, para cada $i=1,...,n$, entonces, la diferencias $
 En este sentido la media y varianza que se utilizan en este casos son:
 
 |               Estadístico                |               Media               |                  Varianza                   |
-|:-------------------------:|:---------------------:|:---------------------:|
+|:-----------------------:|:-------------------:|:-------------------------:|
 | $\overline{D}=\overline{X}-\overline{Y}$ | $\mu_{\overline{D}}= \mu_1-\mu_2$ | $\sigma_{\overline{D}}^2=\frac{s_{d}^2}{n}$ |
 
 Por lo tanto, la distribución muestral de $\overline{D}$ es la $t$ de Student con $n-1$ grados de libertad. Su expresión esta dada por:
