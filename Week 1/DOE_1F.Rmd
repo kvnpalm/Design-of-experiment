@@ -168,9 +168,11 @@ magnitud de su correspondiente fuente de variabilidad. Los dos que más
 interesan son el cuadrado medio de tratamientos y el cuadrado medio del
 error, que se denotan por:
 
-$$MS_{tratamiento}=\frac{SS_{Tratamiento}}{a-1}$$ y,
-$$MS_{E}=\frac{SS_E}{N-a}$$ Los valores esperados de los cuadrados
-medios están dados por:
+$$MS_{tratamiento}=\frac{SS_{Tratamiento}}{a-1}$$ 
+y,
+$$MS_{E}=\frac{SS_E}{N-a}$$ 
+
+Los valores esperados de los cuadrados medios están dados por:
 
 $$E(MS_E)=\sigma^2$$ y,
 
@@ -200,6 +202,88 @@ al valor-p se escribe en la llamada tabla de análisis de varianza
 (ANOVA) que se muestra en la siguiente tabla:
 
 <div/>
+
 ::: {style="text-align:center"}
 ![](images/anova.png){width="544"}
 :::
+
+**Estimación de los parámetros**
+
+A continuación presentamos los estimadores de los parámetros del modelo
+con un solo factor:
+
+-   Estimador de la media global:
+
+$$ \hat{\mu} = \overline{y}_{..}$$
+
+-   Estimador de la media del tratamiento $i$.
+
+$$ \hat{\mu_i} = \overline{y}_{i.}$$
+
+-   Estimador del efecto del tratamiento $i$.
+
+$$ \hat{\tau_i} = \overline{y}_{i.} - \overline{y}_{..}$$
+
+-   Intervalo de confianza para $\mu_i$:
+
+$$\overline{y}_{i.} - t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}} \leq \mu_i \leq \overline{y}_{i.} + t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}}$$
+
+-   Intervalo de confianza para la diferencia de medias:
+
+$$(\overline{y}_{i.}- \overline{y}_{j.})- t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{2MS_E}{n}} \leq \mu_i -\mu_j \leq (\overline{y}_{i.}- \overline{y}_{j.})+ t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{2MS_E}{n}}$$
+
+## Ejemplo 1
+
+Un ingeniero está interesado en investigar el efecto del peso porcentual
+del algodón sobre la resistencia a la tensión ($lb/in^2$) de una nueva
+fibra para fabricar tela. Se Sabe que el contenido de algodón debe
+variar entre 10% y 40%, así que decide probar ejemplares en cinco
+niveles del peso porcentual del algodón: 15, 20, 25, 30 y 35 por ciento.
+También decide probar cinco ejemplares en cada nivel del contenido de
+algodón. Los datos del experimento se presentan en la siguiente tabla:
+
+::: {style="text-align:center"}
+![](images/tabla_ej1.png){width="724"}
+:::
+
+**Solución**
+
+-   **Paso 1**: Encontramos las sumas y los promedios por tratamiento,
+    esto es: $y_{i.}$ y $\overline{y}_{i.}$. También, las sumas y
+    promedios totales, esto es: $y_{..}$ y $\overline{y}_{..}$.
+
+::: {style="text-align:center"}
+![](images/step1_ej1.png){width="718"}
+:::
+
+-   **Paso 2**: Encontramos los $SS_{tratamiento}$ $SS_t$, y $SS_E$.
+
+$$SS_{tratamiento} = n_i\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2=5[(9.8-15.04)^2+(15.4-15.04)^2+(17.6-15.04)^2+(21.6-15.04)^2+(10.8-15.04)^2]+475.76$$
+$$SS_T= \sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2= (7-15.04)^2+(12-15.04)^2+ ... +(11-15.04)^2=636.96$$
+$$SS_E= SS_T - SS_{tratamiento}= 636.96-475.76=161.20$$
+- **Paso 3**: Hallamos los grados de libertad para cada fuente de variación anterior.
+
+para el tratamiento:
+
+$$a-1= 5-1= 4$$
+Para el error:
+
+$$ N-a = 25-5= 20$$
+Para la suma total:
+
+$$N-1= 25-1 =24$$
+
+-  **Paso 4**: Hallamos loas cuadrados medios
+
+
+$$MS_{tratamiento}= \frac{SS_{Tratamiento}}{a-1} = \frac{475.76}{4} = 118.94$$
+$$MS_{E}=\frac{SS_E}{N-a}= \frac{161.20}{20}=8.06$$
+-  **Paso 5**: Hallamos $F_0$
+
+
+
+
+
+
+
+
