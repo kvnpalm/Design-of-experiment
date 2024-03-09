@@ -244,7 +244,7 @@ También decide probar cinco ejemplares en cada nivel del contenido de
 algodón. Los datos del experimento se presentan en la siguiente tabla:
 
 ::: {style="text-align:center"}
-![](images/tabla_ej1.png){width="724"}
+![](images/step1_ej_tabl.png){width="724"}
 :::
 
 **Solución**
@@ -259,7 +259,7 @@ algodón. Los datos del experimento se presentan en la siguiente tabla:
 
 -   **Paso 2**: Encontramos los $SS_{tratamiento}$ $SS_t$, y $SS_E$.
 
-$$SS_{tratamiento} = n_i\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2=5[(9.8-15.04)^2+(15.4-15.04)^2+(17.6-15.04)^2+(21.6-15.04)^2+(10.8-15.04)^2]+475.76$$
+$$SS_{tratamiento} = n_i\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2=5[(9.8-15.04)^2+(15.4-15.04)^2+(17.6-15.04)^2+(21.6-15.04)^2+(10.8-15.04)^2]=475.76$$
 $$SS_T= \sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2= (7-15.04)^2+(12-15.04)^2+ ... +(11-15.04)^2=636.96$$
 $$SS_E= SS_T - SS_{tratamiento}= 636.96-475.76=161.20$$ - **Paso 3**:
 Hallamos los grados de libertad para cada fuente de variación anterior.
@@ -275,10 +275,9 @@ $$N-1= 25-1 =24$$
 -   **Paso 4**: Hallamos loas cuadrados medios
 
 $$MS_{tratamiento}= \frac{SS_{Tratamiento}}{a-1} = \frac{475.76}{4} = 118.94$$
-$$MS_{E}=\frac{SS_E}{N-a}= \frac{161.20}{20}=8.06$$ 
+$$MS_{E}=\frac{SS_E}{N-a}= \frac{161.20}{20}=8.06$$
 
-- **Paso 5**:
-Hallamos $F_0$
+-   **Paso 5**: Hallamos $F_0$
 
 $$F_0=\frac{MS_{tratamiento}}{MS_E}=\frac{118.94}{8.06}=14.76$$
 
@@ -293,13 +292,13 @@ El resumen de los calculos realizados se muestra en la siguiente tabla:
 ![](images/anov.png){width="616"}
 :::
 
+-   **Paso 7**: Conclusión de los resultados
 
-- **Paso 7**: Conclusión de los resultados
+Dado que $p-valor < \alpha$, rechazamos $H_0$, es decir al menos una
+media es diferente.En otras palabras, el peso porcentual del algodol
+incide en la resistencia a la tensión.
 
-Dado que $p-valor < \alpha$, rechazamos $H_0$, es decir al menos una media es diferente.En otras palabras, el peso porcentual del algodol incide en la resistencia a la tensión.
-
-- **Paso 8**: Estimamos los parámetros 
-
+-   **Paso 8**: Estimamos los parámetros
 
 -   Estimador de la media global:
 
@@ -324,19 +323,14 @@ $$ \hat{\tau_5} = \overline{y}_{5.} - \overline{y}_{..}=  10.8 -15.04=-4.24$$
 -   Intervalo de confianza para $\mu_i$:
 
 $$\overline{y}_{i.} - t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}} \leq \mu_i \leq \overline{y}_{i.} + t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}}$$
-Para el tratamiento 1: 
+Para el tratamiento 1:
 $$9.8 - 2.08\sqrt{\frac{8.06}{5}} \leq \mu_1 \leq 9.8 + 2.08\sqrt{\frac{8.06}{5}}$$
-$$7.15 \leq \mu_1 \leq 12.45$$
-Análogamente para el tratamiento 2: 
+$$7.15 \leq \mu_1 \leq 12.45$$ Análogamente para el tratamiento 2:
 
-$$12.75 \leq \mu_2 \leq 18.05$$
-Para el tratamiento 3: 
+$$12.75 \leq \mu_2 \leq 18.05$$ Para el tratamiento 3:
 
-$$14.95 \leq \mu_3 \leq 20.25$$
-Para el tratamiento 4: 
+$$14.95 \leq \mu_3 \leq 20.25$$ Para el tratamiento 4:
 
-$$18.95 \leq \mu_4 \leq 24.25$$
-Para el tratamiento 5: 
+$$18.95 \leq \mu_4 \leq 24.25$$ Para el tratamiento 5:
 
 $$8.15 \leq \mu_4 \leq 13.45$$
-
