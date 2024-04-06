@@ -257,7 +257,7 @@ algodón. Los datos del experimento se presentan en la siguiente tabla:
 ![](images/step1_ej1.png){width="718"}
 :::
 
--   **Paso 2**: Encontramos los $SS_{tratamiento}$ $SS_t$, y $SS_E$.
+-   **Paso 2**: Encontramos los $SS_{tratamiento}$ $SS_T$, y $SS_E$.
 
 $$SS_{tratamiento} = n_i\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2=5[(9.8-15.04)^2+(15.4-15.04)^2+(17.6-15.04)^2+(21.6-15.04)^2+(10.8-15.04)^2]=475.76$$
 $$SS_T= \sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2= (7-15.04)^2+(12-15.04)^2+ ... +(11-15.04)^2=636.96$$
@@ -334,3 +334,249 @@ $$14.95 \leq \mu_3 \leq 20.25$$ Para el tratamiento 4:
 $$18.95 \leq \mu_4 \leq 24.25$$ Para el tratamiento 5:
 
 $$8.15 \leq \mu_4 \leq 13.45$$
+
+-   **Usando R**
+
+Incialmente, se construye el dataframe de los datos
+
+```{r Eje1, echo=TRUE}
+
+#Creamos el dataframe
+
+peso <-c(15,15,15,15,15,20,20,20,20,20,25,25,25,25,25,30,30,30,30,30,35,35,35,35,35)
+resistencia <-c(7,7,15,11,9,12,17,12,18,18,14,18,18,19,19,19,25,22,19,23,7,10,11,15,11)
+
+datos<-data.frame(peso,resistencia)
+datos$peso <- as.factor(datos$peso)
+
+#Mostramos la estructura de los datos
+str(datos)
+
+```
+
+Antes de iniciar la etapa de la construcción del anova, en R podemos
+revisar descriptivamente si hay una diferencia entre las medias de los
+niveles estudiantes, esto es:
+
+```{r Eje11, echo=TRUE}
+
+## boxplots para revisar efectos
+boxplot(resistencia ~ peso, data = datos, las = 1, col = 2:4, xlab = 'peso', ylab = 'resistencia')
+```
+
+Tal como se observa en el gráfico, se puede sospechar que hay
+diferencias entre los niveles del factor Peso.
+
+Ahora construimos la tabla ANOVA:
+
+```{r Eje15, echo=TRUE}
+
+## ANOVA
+fitdisplay <- lm(resistencia ~ peso, data = datos)
+anova(fitdisplay)
+
+```
+
+La conclusión de la tabla ANOVA es que existe al menos un tipo de
+porcentaje de peso para el que las resitencias promedio son superiores o
+inferiores a los demás. En otras palabras, esto indica que la variable
+peso si afecta las resistencias del producto de interes. Aunque este
+resultado es importante, por lo general interesa determinar la magnitud
+del efecto de cada nivel de peso sobre la resistencia. Esto es posible a
+partir del objeto fitdisplay. Para ello utilizamos los estimadores de
+máxima verosimilitud obtenidos al emplear el método de mínimos cuadrados
+ordinarios en el modelo regresión Lineal Simple:
+
+```{r Eje16, echo=TRUE}
+
+## lineal regression
+summary(fitdisplay)
+
+```
+
+A partir de este resultado concluimos que utilizar el peso de 30% mejora
+considerablemente la resistencia respecto al peso del 15%. En
+particular, utilizar el un peso de 30% en lugar del 15% incrementa la
+resistencia en un 11.8%.
+
+Ahora bien, para estimar el estimador de la media global, estimador del
+efecto del tratamiento $i$, y estimador del efecto del tratamiento $i$.
+Se sigue lo siguiente:
+
+```{r Eje12, echo=TRUE}
+
+#Calculamos las medias (Estimadores por tratamiento)
+## measures using tapply
+with(datos, tapply(resistencia, peso, mean))
+
+```
+
+```{r Eje13, echo=TRUE}
+
+#Efectos de cada tratamiento
+with(datos, tapply(resistencia, peso, mean))-mean(datos$resistencia)
+
+```
+
+```{r Eje14, echo=TRUE}
+
+#Media Global
+mean(datos$resistencia)
+
+```
+
+Que podemos decir acerca de la comparación de los diferentes pesos Para
+responder a esto utilizamos una comparación ad hoc. Esta comparación
+puede hacerse utilizando la prueba de mínima diferencia significativa de
+Tukey:
+
+```{r Eje17, echo=TRUE}
+
+## Least Singificant Difference (LSD) test
+anova <- aov(fitdisplay)
+(lsd <- TukeyHSD(anova, "peso", ordered = TRUE))
+
+
+```
+
+Los resultados indican que la diferencia 20-15, 25-15, 30-15, 25-35,
+30-35, y 30-20 son estadísticamente significativas después de
+correcciones por múltiples comparaciones, es decir, que la columna p-adj
+es \< 0.05, donde este último valor corresponde a la probabilidad de
+Error Tipo I.
+
+Para visualizar dichas diferencias utilizamos la función plot sobre el
+objeto lsd:
+
+```{r Eje18, echo=TRUE, fig.height=10}
+## LSD plot
+plot(lsd)
+```
+
+La conclusión es la misma que obtuvimos al analizar los resultados
+numéricos.
+
+Finalmente, los intervalos de confianza se pueden calcular con el
+siguiente código para cada tratamiento:
+
+```{r Eje24, echo=TRUE, fig.height=10}
+## Intervalos de confianza
+
+calcular_intervalo_confianza <- function(promedio,mse,grados_libertad,n, confianza = 0.95) {
+  error_estandar <- sqrt(mse/n)
+  t_valor <- qt((1 + confianza) / 2, df = grados_libertad)  # Valor crítico de t
+  
+  margen_error <- t_valor * error_estandar
+  limite_inferior <- promedio - margen_error
+  limite_superior <- promedio + margen_error
+  
+  return(c(limite_inferior, limite_superior))
+}
+resumen_modelo<-summary(fitdisplay)
+mse <-resumen_modelo$sigma^2
+promedio <- with(datos, tapply(resistencia, peso, mean))
+n <- 5
+grados_libertad <- 20
+
+for (i in 1:n) {
+  intervalos_confianza<-calcular_intervalo_confianza(promedio[i],mse,grados_libertad,n)
+  cat("Intervalo de confianza para el tratamiento", i,": [",intervalos_confianza[1],",",intervalos_confianza[2], "]\n")
+}
+
+
+```
+
+# Supuestos
+
+La validez de los resultados obtenidos en cualquier análisis de varianza
+queda supeditado a que los supuestos del modelo se cumplan. Estos
+supuestos son: normalidad, varianza constante (igual varianza de los
+tratamientos) e independencia. Esto es, la respuesta ($Y$) en cada
+tratamiento se debe distribuir de manera normal, con la misma varianza
+en cada tratamiento, y las mediciones deben ser independientes. Estos
+supuestos sobre $Y$ se traducen en supuestos sobre el término error
+($\varepsilon$) en el mo- delo.Es una práctica común utilizar la muestra
+de residuos para comprobar los supuestos del modelo, ya que si los
+supuestos se cumplen, los residuos o residuales se pueden ver como una
+muestra aleatoria de una distribución normal con media cero y varianza
+constante. Los residuos, $\varepsilon_{ij}$, se definen como la
+diferencia entre la respuesta observada ($y_{ij}$) y la respuesta
+predicha por el modelo ($\widehat{y_{ij}}$), lo cual permite hacer un
+diagnóstico más directo de la calidad del modelo, ya que su magnitud
+señala qué tan bien el modelo describe los datos.
+
+En general, En DOE de un factor al igual que los otros DOE, se tienen
+los siguientes supuestos sobre el error aleatorio, $\varepsilon$:
+
+1.  $\mu_\varepsilon= 0$, donde $\mu_\varepsilon$ es la media de $\varepsilon$. (Linealidad)
+
+2.  $\varepsilon_1, \varepsilon_2, ... , \varepsilon_n$ tiene varianza constante $\sigma^2$ (Homocedasticidad)
+
+3.  $\varepsilon \sim N(0,\sigma^2)$ (Normalidad)
+
+4.  $\varepsilon_i$ y  $\varepsilon_j$ son independientes para $i \neq j$
+
+
+En R dicha validación se realiza sobre los residuales del modelo ajustado. En nuestro caso, este modelo está contenido en el objeto fitdidisplays.
+
+```{r Eje20, echo=TRUE, fig.height=10,message=FALSE}
+require(car)
+## calcular los residuals
+r <- rstudent(fitdisplay)
+
+```
+
+## Normalidad
+
+Para la prueba de normalidad de utiliza el Q-Q plot y la prueba de Shapiro-Wilk. En el caso del plot Q-Q se debe observar que los puntos sigan la línea recta para comprobar la normalidad en los residuos. Para el Caso del Test de Shapiro-Wilk se valida que $H_0:$ Los datos proceden de una distribución normal, donde se concluye que sigue una distribución normal si el $P-value > \alpha$. 
+
+```{r Eje21, echo=TRUE}
+## Supuesto de  normalidad
+shapiro.test(r)
+#Graficamente
+qqnorm(r, las = 1)
+qqline(r, col = 1, lty = 2)
+```
+
+
+Para este caso en particula, se cumple el supuesto de normalidad, dado a que p-values es igual a 0.4917
+
+## Homocedasticidad
+
+Para el caso de la prueba de varianza constate (Homocedasticidad), se utiliza el test de Barlett, Donde se valida $H_0:$ la varianza es constante, donde se concluye qe hay homocedasticidad en los residuos si el $P-value > \alpha$. 
+
+```{r Eje19, echo=TRUE}
+## varianza constante usando Breusch-Pagan
+car:::ncvTest(fitdisplay)
+bartlett.test(datos$resistencia ~ datos$peso)
+```
+
+Para este caso en particula, se cumple el supuesto de homocedasticidad, dado a que p-values es igual a 0.919
+
+## Independencia de los errores
+
+Una prueba analítica para verificar la independencia entre residuos consecutivos es la prueba de Durbin-Watson. Para validar el suspuesto de independencia de errores en los residuos el $P-value > \alpha$. 
+
+```{r Eje23, echo=TRUE}
+## Durbin-Watson (Prueba de independencia dee errores)
+durbinWatsonTest(fitdisplay)
+```
+Para este caso en particula, se cumple el supuesto de independencia de errores, dado a que p-values es igual a 0.806.
+
+Gráficamente, podemos validar los supuestos con los siguientes plots:
+
+```{r Eje22, echo=TRUE}
+# r vs. x1
+par(mfrow = c(1, 2), mai = c(0.65, 0.65, .65, .65))
+plot(r, las = 1, ylab = 'Residual', xlab = "Observation #", main = 'Residuals')
+abline(h = 0, col = 2, lty = 2)
+# r vs. x3
+boxplot(r ~ datos$peso, las = 1, ylab = 'Residual', xlab = "Peso", main = "Peso")
+abline(h = 0, col = 2, lty = 2)
+
+## independence using ACF
+acf(r, las = 1, main = "")
+mtext("ACF", side = 3, line = .2)
+```
+
+Estos resultados indican que los errores del modelo ajustado son independientes, siguen una distribución normal y tienen varianza constante. Por lo tanto, el modelo y las conclusiones que se deriven de él son valida.
