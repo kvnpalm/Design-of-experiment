@@ -287,4 +287,25 @@ $\alpha=0.05$.
 
 **Solución**
 
-![](images/Screenshot 2024-04-22 at 5.33.25 PM.png)
+::: {style="text-align:center"}
+![](images/solucion_blocking.png)
+:::
+
+-   **Usando R**
+
+Incialmente, se construye el dataframe de los datos
+
+```{r Eje1, echo=TRUE}
+
+#Creamos el dataframe
+
+peso <-c(15,15,15,15,15,20,20,20,20,20,25,25,25,25,25,30,30,30,30,30,35,35,35,35,35)
+resistencia <-c(7,7,15,11,9,12,17,12,18,18,14,18,18,19,19,19,25,22,19,23,7,10,11,15,11)
+
+datos<-data.frame(peso,resistencia)
+datos$peso <- as.factor(datos$peso)
+
+#Mostramos la estructura de los datos
+str(datos)
+
+```
