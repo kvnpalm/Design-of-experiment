@@ -39,10 +39,8 @@ variable de respuesta.
 
 **Objetivo:**
 
--   Evaluar si existe una diferencia significativa entre las medias de
-    los diferentes niveles del factor.
--   Determinar si el factor tiene un efecto significativo sobre la
-    variable de respuesta.
+-   Evaluar si existe una diferencia significativa entre las medias de los diferentes niveles del factor.
+-   Determinar si el factor tiene un efecto significativo sobre la variable de respuesta.
 
 **Componentes del ANOVA:**
 

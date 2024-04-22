@@ -1,0 +1,290 @@
+---
+title: "Experimentos de un solo factor con bloques aleatorizados"
+author: "Kevin Palomino"
+date: "2024-04-15"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Los experimentos de un solo factor con bloques aleatorizados son un tipo
+específico de diseño experimental que combina las características de los
+experimentos de un solo factor con la técnica de bloques aleatorizados.
+En este tipo de experimento, el factor de interés (variable
+independiente) se manipula mientras se controlan otras variables que
+podrían influir en los resultados. Sin embargo, a diferencia de un
+diseño típico de un solo factor, los sujetos o unidades experimentales
+se agrupan en bloques homogéneos basados en una variable de control
+relevante.
+
+Por ejemplo, si estamos estudiando el efecto de diferentes tipos de
+fertilizantes en el crecimiento de plantas, podríamos agrupar las
+parcelas de tierra en bloques según su nivel de exposición al sol, y
+luego asignar aleatoriamente los tratamientos de fertilizantes dentro de
+cada bloque. Esto ayuda a reducir la variabilidad experimental al tener
+en cuenta factores que podrían influir en los resultados.
+
+Los experimentos de un solo factor con bloques aleatorizados permiten
+una mejor precisión en la estimación del efecto del factor de interés al
+controlar más eficazmente la variabilidad experimental. Esto los hace
+especialmente útiles en situaciones donde hay factores adicionales que
+podrían afectar los resultados y que pueden ser controlados o medidas en
+bloques.
+
+**Conceptos básicos**
+
+-   Factores: Fenómenos que potencialmente causan variación y que se
+    pueden fijar en un valor dado.
+-   Niveles: Valores que un factor puede tomar.
+-   Tratamieto: Combinación de niveles de todos los factores
+    involucrados en el experimento.
+-   Variable de respuesta: Se mide el efecto del factor sobre una
+    variable dependiente.
+-   Experimento balanceado: Experimento en que todos los niveles
+    aparecen el mismo número de veces.
+-   Factor perturbador: Factor que puede tener un efecto sobre la
+    respuesta, pero en el que no se tiene un interés particular. Puede
+    ser: (a) desconocido y no controlable o (b) conocido y controlable.
+
+## Bloques
+
+A los factores adicionales al factor de interés que se incorporan de
+manera explícita en un experimento comparativo se les llama factores de
+bloque. Éstos tienen la particularidad de que se incluyen en el
+experimento no porque interese analizar su efecto, sino como un medio
+para estudiar de manera adecuada y eficaz el factor de interés. Los
+factores de bloque entran al estudio en un nivel de importancia
+secundaria con respecto al factor de interés y, en este sentido, se
+puede afirmar que se estudia un solo factor, porque es uno el factor de
+interés.
+
+**Algunas particularidades**
+
+-   Se tienen 𝑎 tratamientos a comparar y 𝑏 bloques.
+
+-   Una observación por tratamiento en cada bloque y el orden de
+    corridas dentro de cada bloque es aleatorio.
+
+-   Los bloques representan una restricción sobre la aleatorización.
+
+::: {style="text-align:center"}
+![](images/blocking.png){width="347"}
+:::
+
+En un diseño en bloques completos al azar (DBCA) se consideran tres
+fuentes de variabilidad: el factor de tratamientos, el factor de bloque
+y el error aleatorio, es decir, se tienen tres posibles “culpables” de
+la variabilidad presente en los datos. La palabra completo en el nombre
+del diseño se debe a que en cada bloque se prueban todos los
+tratamientos, o sea, los bloques están completos. La aleatorización se
+hace dentro de cada bloque; por lo tanto, no se realiza de manera total
+como en el diseño completamente al azar. El hecho de que existan bloques
+hace que no sea práctico o que incluso sea imposible aleatorizar en su
+totalidad.
+
+# Análisis de varianza (ANOVA)
+
+El análisis de varianza (ANOVA) es una técnica estadística comúnmente
+utilizada en experimentos de un solo factor con bloques aleatorizados
+para determinar si existen diferencias significativas entre los niveles
+del factor de interés en términos de su efecto sobre la variable
+dependiente. El ANOVA descompone la variabilidad total observada en el
+conjunto de datos en componentes atribuibles a diferentes fuentes de
+variación, como el efecto del factor, la variación entre bloques y la
+variación dentro de los bloques.
+
+**Objetivo:**
+
+-   Determinar con precisión el efecto del factor de interés sobre la
+    variable dependiente, mientras se controlan otras fuentes de
+    variabilidad que podrían influir en los resultados.
+
+**Componentes del ANOVA:**
+
+-   Factor: Variable independiente que se modifica en el experimento.
+-   Niveles: Categorías o valores específicos del factor.
+-   Variable de respuesta: Variable dependiente que se mide en el
+    experimento.
+-   Modelo lineal: Se utiliza para describir la relación entre el factor
+    y la variable de respuesta.
+-   Suma de cuadrados total (SST): Es la variabilidad total en los datos
+    y se calcula como la suma de las diferencias al cuadrado entre cada
+    observación y la media general de todas las observaciones.
+-   Suma de cuadrados del factor ($SS_{tratamiento}$): Representa la
+    variabilidad entre los niveles del factor de interés y se calcula
+    como la suma de las diferencias al cuadrado entre la media de cada
+    nivel del factor y la media general de todos los datos, ponderada
+    por el número de observaciones en cada nivel.
+-   Suma de cuadrados de los bloques (SSB): Representa la variabilidad
+    entre los bloques y se calcula como la suma de las diferencias al
+    cuadrado entre la media de cada bloque y la media general de todos
+    los datos, ponderada por el número de observaciones en cada bloque.
+-   Suma de cuadrados del error (SSE): Es la variabilidad dentro de los
+    bloques y se calcula como la suma de las diferencias al cuadrado
+    entre cada observación y la media de su respectivo bloque.
+-   Grados de libertad: Indica el número de valores independientes en
+    cada conjunto de datos.
+-   Media cuadrática: Estima la varianza dentro y entre los grupos.
+-   Razón F: Se utiliza para comparar la varianza entre los grupos con
+    la varianza dentro de los grupos.
+-   Valor p: Indica la probabilidad de obtener una razón F tan grande o
+    más grande por casualidad.
+
+**Interpretación de resultados:**
+
+-   Si el valor p es menor que el nivel de significancia ($p < \alpha$),
+    entonces se rechaza la hipótesis nula. Esto sugiere que las
+    diferencias observadas entre los grupos son estadísticamente
+    significativas, lo que indica que al menos uno de los grupos difiere
+    significativamente de los demás.
+
+-   Si el valor p es mayor que el nivel de significancia ($p ≥ \alpha$),
+    entonces no se rechaza la hipótesis nula. En este caso, no hay
+    evidencia suficiente para concluir que existen diferencias
+    significativas entre los grupos comparados.
+
+## Hipótesis
+
+Ahora bien, el objetivo del análisis de varianza es probar la hipótesis
+de igualdad de los tratamientos con respecto a la media de la
+correspondiente variable de respuesta:
+
+$$ H_0: \mu_1=\mu_2 = ... = \mu_n = \mu$$
+$$H_1: \mu_i \neq \mu_j  \text{    para algún      } i \neq j$$ la cual
+se puede escribir en forma equivalente en forma de efecto como:
+
+$$ H_0: \tau_1=\tau_2 = ... = \tau_k = 0$$
+$$H_1: \tau_i \neq 0  \text{    para algún      } i$$ donde $\tau_i$ es
+el efecto del tratamiento $i$ sobre la variable de respuesta. Si se
+acepta $H_0$, se confirma que los efectos sobre la respuesta de los $k$
+tratamientos son estadísticamente nulos (iguales a cero), y en caso de
+rechazar se estaría concluyendo que al menos un efecto es diferente de
+cero.
+
+Ahora bien, si comparamos las hipótesis para la media y para los efectos
+se deduce que:
+
+$$ \mu_i - \mu =\tau_i\  \ \ \ \ \ \  \ \forall i$$
+
+Lo cual representa el efecto del tratamiento $i$,esto es la distancia
+entre la respuesta media del tratamiento, $\mu_i$, y la respuesta media
+global, $\mu$; y cuando un efecto es igual a cero, equivale a decir que
+la media del tratamiento correspondiente es igual a la media global.
+Así, se observa que para que todas las respuestas medias de tratamientos
+sean iguales a la respuesta media global, $\mu$, representada por la
+línea horizontal, se requiere que todos los efectos $\tau_i$ sean
+iguales a cero.
+
+Ahora bien, para probar la hipótesis planteandas mediante la técnica de
+ANOVA, se debe separar la variabilidad total de los datos. Para ello se
+tiene que una medida de la variabilidad total presente en las
+observaciones de la siguiente tabla:
+
+::: {style="text-align:center"}
+![](images/T_blocking.png){width="582"}
+:::
+
+En este sentido,la suma total de cuadrados dada por:
+
+$$SST=\sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2=\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{ij}-\frac{y^2_{..}}{N} $$
+
+Por lo tanto, la partición de la variabilidad global es:
+
+$$\sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2=b\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2+a\sum_{j=1}^{b}(\overline{y}_{.j}-\overline{y}_{..})^2+\sum_{i=1}^{a}\sum_{j=1}^{b}(y_{ij}-\overline{y}_{i.}-\overline{y}_{.j}+\overline{y}_{..})^2 $$
+Donde,
+
+$$SS_{Tratamiento}=b\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2=\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{i.}-\frac{y^2_{..}}{N}$$
+
+$$SS_{Bloques}=a\sum_{j=1}^{b}(\overline{y}_{.j}-\overline{y}_{..})^2=\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{.j}-\frac{y^2_{..}}{N}$$
+y,
+
+$$SS_{E}=SST-SS_{Tratamiento}-SS_{Bloques} $$
+
+Como hay un total de N observaciones, la $SST$ tiene $N – 1$ grados de
+libertad. Hay $a$ tratamientos y $b$ bloques, entonces
+$SS_{Tratamiento}$ y $SS_{bloques}$ tienen $a – 1$ y $b – 1$ grados de
+libertad, respectivamente. Finalmente, el $SS_E$ tiene $(a-1)(b-1)$
+grados de libertad.
+
+Por otra parte, las sumas de cuadrados divididas entre sus respectivos
+grados de libertad se llaman cuadrados medios, y es una estimación de la
+magnitud de su correspondiente fuente de variabilidad. Las tres que más
+interesan son el cuadrado medio de tratamientos, el cuadrado medio del
+bloque y el cuadrado medio del error, que se denotan por:
+
+$$MS_{tratamiento}=\frac{SS_{Tratamiento}}{a-1}$$
+$$MS_{bloque}=\frac{SS_{bloque}}{b-1}$$
+
+y, $$MS_{E}=\frac{SS_E}{(a-1)(b-1)}$$ Con base a lo anterior se
+construye los estadísticos de prueba como sigue:
+
+$$F_0=\frac{MS_{tratamiento}}{MS_E}$$
+
+$$F_0=\frac{MS_{bloques}}{MS_E}$$
+
+La cual sigue una distribución $F$ de fisher con $(a – 1)$ grados de
+libertad en el numerador y $(a-1)(b-1)$ grados de libertad en el
+denominador. Donde se deduce que si $F_0$ es grande, se contradice la
+hipótesis de que no hay efectos de tratamientos; en cambio, si $F_0$ es
+pequeño, se confirma la validez de $H_0$. Así, para un nivel de
+significancia predefinido, se rechaza $H_0$ si
+$F_0 > F_{\alpha, a -1, (a-1)(b-1)}$, donde
+$F_{\alpha, a -1, (a-1)(b-1)}}$ es el percentil $(1 – \alpha) *100$ de
+la distribución F. También se rechaza $H_0$ si el $valor-p < \alpha$,
+donde el valor-p es el área bajo la distribución $F_{a -1, N – a}$ a la
+derecha del estadístico $F_0$, es decir, el valor-p = $P(F > F_0)$ es la
+significancia observada. Las fórmulas simplificadas para calcular el
+estadístico $F_0$ hasta llegar al valor-p se escribe en la llamada tabla
+de análisis de varianza (ANOVA) que se muestra en la siguiente tabla:
+
+::: {style="text-align:center"}
+![](images/anova_blocking.png){width="598"}
+:::
+
+**Estimación de los parámetros**
+
+A continuación presentamos los estimadores de los parámetros del modelo
+con un solo factor con bloques aleatorizados:
+
+-   Estimador de la media global:
+
+$$ \hat{\mu} = \overline{y}_{..}$$
+
+-   Estimador de la media del tratamiento $i$.
+
+$$ \hat{\mu_i} = \overline{y}_{i.}$$
+
+-   Estimador del efecto del tratamiento $i$.
+
+$$ \hat{\tau_i} = \overline{y}_{i.} - \overline{y}_{..}$$ - Estimador
+del efecto del bloque $j$.
+
+$$ \hat{\tau_i} = \overline{y}_{.j} - \overline{y}_{..}$$ - Intervalo de
+confianza para $\mu_i$:
+
+$$\overline{y}_{i.} - t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}} \leq \mu_i \leq \overline{y}_{i.} + t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}}$$
+
+-   Intervalo de confianza para la diferencia de medias:
+
+$$(\overline{y}_{i.}- \overline{y}_{j.})- t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{2MS_E}{n}} \leq \mu_i -\mu_j \leq (\overline{y}_{i.}- \overline{y}_{j.})+ t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{2MS_E}{n}}$$
+
+## Ejemplo 1
+
+Se desea determinar si cuatro puntas diferentes producen lecturas
+diferentes en una máquina para probar la dureza de un metal. El
+experimentador cuenta con cuatro ejemplares y cada punta se prueba en
+cada uno de los ejemplares. Analice este experimento utilizando un
+$\alpha=0.05$.
+
+::: {style="text-align:center"}
+![](images/ejem_blocking.png){width="610"}
+:::
+
+**Solución**
+
+![](images/Screenshot 2024-04-22 at 5.33.25 PM.png)
