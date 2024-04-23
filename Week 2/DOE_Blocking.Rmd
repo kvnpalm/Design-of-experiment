@@ -233,8 +233,8 @@ denominador. Donde se deduce que si $F_0$ es grande, se contradice la
 hipótesis de que no hay efectos de tratamientos; en cambio, si $F_0$ es
 pequeño, se confirma la validez de $H_0$. Así, para un nivel de
 significancia predefinido, se rechaza $H_0$ si
-$F_0 > F_{\alpha, a -1, (a-1)(b-1)}$, donde
-$F_{\alpha, a -1, (a-1)(b-1)}}$ es el percentil $(1 – \alpha) *100$ de
+$F_0 > F_{ \alpha, a -1, (a-1)(b-1)}$, donde
+$F_{ \alpha, a-1, (a-1)(b-1)}$ es el percentil $(1 – \alpha) *100$ de
 la distribución F. También se rechaza $H_0$ si el $valor-p < \alpha$,
 donde el valor-p es el área bajo la distribución $F_{a -1, N – a}$ a la
 derecha del estadístico $F_0$, es decir, el valor-p = $P(F > F_0)$ es la
