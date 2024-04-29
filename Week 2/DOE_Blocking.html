@@ -529,8 +529,8 @@ observaciones de la siguiente tabla:</p>
 <p>Por lo tanto, la partición de la variabilidad global es:</p>
 <p><span class="math display">\[\sum_{i=1}^{a}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{..})^2=b\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2+a\sum_{j=1}^{b}(\overline{y}_{.j}-\overline{y}_{..})^2+\sum_{i=1}^{a}\sum_{j=1}^{b}(y_{ij}-\overline{y}_{i.}-\overline{y}_{.j}+\overline{y}_{..})^2
 \]</span> Donde,</p>
-<p><span class="math display">\[SS_{Tratamiento}=b\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2=\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{i.}-\frac{y^2_{..}}{N}\]</span></p>
-<p><span class="math display">\[SS_{Bloques}=a\sum_{j=1}^{b}(\overline{y}_{.j}-\overline{y}_{..})^2=\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{.j}-\frac{y^2_{..}}{N}\]</span>
+<p><span class="math display">\[SS_{Tratamiento}=b\sum_{i=1}^{a}(\overline{y}_{i.}-\overline{y}_{..})^2=\frac{1}{b}\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{i.}-\frac{y^2_{..}}{N}\]</span></p>
+<p><span class="math display">\[SS_{Bloques}=a\sum_{j=1}^{b}(\overline{y}_{.j}-\overline{y}_{..})^2=\frac{1}{a}\sum_{i=1}^{a}\sum_{j=1}^{n_i}y^2_{.j}-\frac{y^2_{..}}{N}\]</span>
 y,</p>
 <p><span class="math display">\[SS_{E}=SST-SS_{Tratamiento}-SS_{Bloques}
 \]</span></p>
@@ -556,7 +556,7 @@ denominador. Donde se deduce que si <span class="math inline">\(F_0\)</span> es 
 de que no hay efectos de tratamientos; en cambio, si <span class="math inline">\(F_0\)</span> es pequeño, se confirma la validez de
 <span class="math inline">\(H_0\)</span>. Así, para un nivel de
 significancia predefinido, se rechaza <span class="math inline">\(H_0\)</span> si <span class="math inline">\(F_0
-&gt; F_{\alpha, a -1, (a-1)(b-1)}\)</span>, donde <span class="math inline">\(F_{\alpha, a -1, (a-1)(b-1)}}\)</span> es el
+&gt; F_{ \alpha, a -1, (a-1)(b-1)}\)</span>, donde <span class="math inline">\(F_{ \alpha, a-1, (a-1)(b-1)}\)</span> es el
 percentil <span class="math inline">\((1 – \alpha) *100\)</span> de la
 distribución F. También se rechaza <span class="math inline">\(H_0\)</span> si el <span class="math inline">\(valor-p &lt; \alpha\)</span>, donde el valor-p es
 el área bajo la distribución <span class="math inline">\(F_{a -1, N –
@@ -588,16 +588,9 @@ modelo con un solo factor con bloques aleatorizados:</p>
 <p><span class="math display">\[ \hat{\tau_i} = \overline{y}_{.j} -
 \overline{y}_{..}\]</span> - Intervalo de confianza para <span class="math inline">\(\mu_i\)</span>:</p>
 <p><span class="math display">\[\overline{y}_{i.} -
-t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}} \leq \mu_i \leq
+t_{(\frac{\alpha}{2},(a-1)(b-1))}\sqrt{\frac{MS_E}{b}} \leq \mu_i \leq
 \overline{y}_{i.} +
-t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{MS_E}{n}}\]</span></p>
-<ul>
-<li>Intervalo de confianza para la diferencia de medias:</li>
-</ul>
-<p><span class="math display">\[(\overline{y}_{i.}- \overline{y}_{j.})-
-t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{2MS_E}{n}} \leq \mu_i -\mu_j \leq
-(\overline{y}_{i.}- \overline{y}_{j.})+
-t_{(\frac{\alpha}{2},N-a)}\sqrt{\frac{2MS_E}{n}}\]</span></p>
+t_{(\frac{\alpha}{2},(a-1)(b-1))}\sqrt{\frac{MS_E}{b}}\]</span></p>
 </div>
 <div id="ejemplo-1" class="section level2">
 <h2>Ejemplo 1</h2>
@@ -864,7 +857,7 @@ independencia de errores en los residuos el <span class="math inline">\(P-value 
 <pre class="r"><code>## Durbin-Watson (Prueba de independencia dee errores)
 durbinWatsonTest(fitdisplay)</code></pre>
 <pre><code>##  lag Autocorrelation D-W Statistic p-value
-##    1      -0.4921875      2.953125   0.186
+##    1      -0.4921875      2.953125    0.23
 ##  Alternative hypothesis: rho != 0</code></pre>
 <p>Para este caso en particula, se cumple el supuesto de independencia
 de errores, dado a que p-values es igual a 0.226.</p>

@@ -234,9 +234,9 @@ hipótesis de que no hay efectos de tratamientos; en cambio, si $F_0$ es
 pequeño, se confirma la validez de $H_0$. Así, para un nivel de
 significancia predefinido, se rechaza $H_0$ si
 $F_0 > F_{ \alpha, a -1, (a-1)(b-1)}$, donde
-$F_{ \alpha, a-1, (a-1)(b-1)}$ es el percentil $(1 – \alpha) *100$ de
-la distribución F. También se rechaza $H_0$ si el $valor-p < \alpha$,
-donde el valor-p es el área bajo la distribución $F_{a -1, N – a}$ a la
+$F_{ \alpha, a-1, (a-1)(b-1)}$ es el percentil $(1 – \alpha) *100$ de la
+distribución F. También se rechaza $H_0$ si el $valor-p < \alpha$, donde
+el valor-p es el área bajo la distribución $F_{a -1, (a-1)(b-1)}$ a la
 derecha del estadístico $F_0$, es decir, el valor-p = $P(F > F_0)$ es la
 significancia observada. Las fórmulas simplificadas para calcular el
 estadístico $F_0$ hasta llegar al valor-p se escribe en la llamada tabla
@@ -268,7 +268,6 @@ $$ \hat{\tau_i} = \overline{y}_{.j} - \overline{y}_{..}$$ - Intervalo de
 confianza para $\mu_i$:
 
 $$\overline{y}_{i.} - t_{(\frac{\alpha}{2},(a-1)(b-1))}\sqrt{\frac{MS_E}{b}} \leq \mu_i \leq \overline{y}_{i.} + t_{(\frac{\alpha}{2},(a-1)(b-1))}\sqrt{\frac{MS_E}{b}}$$
-
 
 ## Ejemplo 1
 
@@ -310,6 +309,7 @@ str(datos)
 head(datos)
 
 ```
+
 Antes de iniciar la etapa de la construcción del anova, en R podemos
 revisar descriptivamente si hay una diferencia entre las medias de los
 niveles estudiantes, esto es:
@@ -326,7 +326,8 @@ boxplot(yield ~ A, data = datos, las = 1, col = cols[2:5], xlab = 'Tipo de punta
 boxplot(yield ~ block, data = datos, las = 1, col = cols[1:6], xlab = 'Bloques', ylab = 'Dureza')
 ```
 
-Tal como se observa en el gráfico, se puede sospechar que hay diferencias entre los niveles del factor tipo de punta.
+Tal como se observa en el gráfico, se puede sospechar que hay
+diferencias entre los niveles del factor tipo de punta.
 
 ```{r Eje15, echo=TRUE}
 
@@ -335,14 +336,15 @@ fit <- aov(yield ~ A + block, data = datos)
 summary(fit)
 
 ```
-La conclusión de la tabla ANOVA es que existe al menos un tipo de
-punta para el que las durezas promedio son superiores o
-inferiores a los demás. En otras palabras, esto indica que la variable
-tipo de punta si afecta la dureza del producto de interes. Aunque este
-resultado es importante, por lo general interesa determinar la magnitud
-del efecto de cada nivel de tipo de punta sobre la dureza. Esto es posible a
-partir del objeto fitdisplay. Para ello utilizamos los estimadores de
-máxima verosimilitud obtenidos al emplear el método de mínimos cuadrados
+
+La conclusión de la tabla ANOVA es que existe al menos un tipo de punta
+para el que las durezas promedio son superiores o inferiores a los
+demás. En otras palabras, esto indica que la variable tipo de punta si
+afecta la dureza del producto de interes. Aunque este resultado es
+importante, por lo general interesa determinar la magnitud del efecto de
+cada nivel de tipo de punta sobre la dureza. Esto es posible a partir
+del objeto fitdisplay. Para ello utilizamos los estimadores de máxima
+verosimilitud obtenidos al emplear el método de mínimos cuadrados
 ordinarios en el modelo regresión Lineal Simple:
 
 ```{r Eje16, echo=TRUE}
@@ -352,10 +354,11 @@ fitdisplay <- lm(yield ~ A+block, data = datos)
 summary(fitdisplay)
 
 ```
-A partir de este resultado concluimos que utilizar un tipo punta 4 mejora
-considerablemente la dureza respecto al tipo de punta 1. En
-particular, utilizar el un tipo de punta 4 en lugar del tipo de punta 1 incrementa la
-resistencia en un 30%.
+
+A partir de este resultado concluimos que utilizar un tipo punta 4
+mejora considerablemente la dureza respecto al tipo de punta 1. En
+particular, utilizar el un tipo de punta 4 en lugar del tipo de punta 1
+incrementa la resistencia en un 30%.
 
 Ahora bien, para estimar el estimador de la media global, estimador del
 efecto del tratamiento $i$, y estimador del efecto del tratamiento $i$.
@@ -375,6 +378,7 @@ with(datos, tapply(yield, A, mean))
 with(datos, tapply(yield, A, mean))-mean(datos$yield)
 
 ```
+
 ```{r Eje5, echo=TRUE}
 
 #Efectos de cada bloque
@@ -388,10 +392,11 @@ with(datos, tapply(yield, block, mean))-mean(datos$yield)
 mean(datos$yield)
 
 ```
-¿Qué podemos decir acerca de la comparación de los diferente tipos de puntas?. Para
-responder a esto utilizamos una comparación ad hoc. Esta comparación
-puede hacerse utilizando la prueba de mínima diferencia significativa de
-Tukey:
+
+¿Qué podemos decir acerca de la comparación de los diferente tipos de
+puntas?. Para responder a esto utilizamos una comparación ad hoc. Esta
+comparación puede hacerse utilizando la prueba de mínima diferencia
+significativa de Tukey:
 
 ```{r Eje17, echo=TRUE}
 
@@ -401,10 +406,11 @@ anova <- aov(fitdisplay)
 
 
 ```
-Los resultados indican que la diferencia 4-3, 4-1, y 4-2 son estadísticamente significativas después de
-correcciones por múltiples comparaciones, es decir, que la columna p-adj
-es \< 0.05, donde este último valor corresponde a la probabilidad de
-Error Tipo I.
+
+Los resultados indican que la diferencia 4-3, 4-1, y 4-2 son
+estadísticamente significativas después de correcciones por múltiples
+comparaciones, es decir, que la columna p-adj es \< 0.05, donde este
+último valor corresponde a la probabilidad de Error Tipo I.
 
 Para visualizar dichas diferencias utilizamos la función plot sobre el
 objeto lsd:
@@ -415,6 +421,7 @@ par(mfrow = c(1, 1), mar = c(5, 6, 3, 1))
 plot(TukeyHSD(anova, "A", ordered = TRUE), las = 1)
 
 ```
+
 La conclusión es la misma que obtuvimos al analizar los resultados
 numéricos.
 
@@ -447,7 +454,8 @@ for (i in 1:n) {
 
 
 ```
- Supuestos
+
+# Supuestos
 
 La validez de los resultados obtenidos en cualquier análisis de varianza
 queda supeditado a que los supuestos del modelo se cumplan. Estos
@@ -469,14 +477,18 @@ señala qué tan bien el modelo describe los datos.
 En general, En DOE de un factor al igual que los otros DOE, se tienen
 los siguientes supuestos sobre el error aleatorio, $\varepsilon$:
 
-1.  $\mu_\varepsilon= 0$, donde $\mu_\varepsilon$ es la media de $\varepsilon$. (Linealidad)
+1.  $\mu_\varepsilon= 0$, donde $\mu_\varepsilon$ es la media de
+    $\varepsilon$. (Linealidad)
 
-2.  $\varepsilon_1, \varepsilon_2, ... , \varepsilon_n$ tiene varianza constante $\sigma^2$ (Homocedasticidad)
+2.  $\varepsilon_1, \varepsilon_2, ... , \varepsilon_n$ tiene varianza
+    constante $\sigma^2$ (Homocedasticidad)
 
 3.  $\varepsilon \sim N(0,\sigma^2)$ (Normalidad)
 
-4.  $\varepsilon_i$ y  $\varepsilon_j$ son independientes para $i \neq j$
-En R dicha validación se realiza sobre los residuales del modelo ajustado. En nuestro caso, este modelo está contenido en el objeto fitdidisplays.
+4.  $\varepsilon_i$ y $\varepsilon_j$ son independientes para $i \neq j$
+    En R dicha validación se realiza sobre los residuales del modelo
+    ajustado. En nuestro caso, este modelo está contenido en el objeto
+    fitdidisplays.
 
 ```{r Eje20, echo=TRUE, fig.height=10,message=FALSE}
 require(car)
@@ -484,9 +496,15 @@ require(car)
 r <- rstudent(fitdisplay)
 
 ```
+
 ## Normalidad
 
-Para la prueba de normalidad de utiliza el Q-Q plot y la prueba de Shapiro-Wilk. En el caso del plot Q-Q se debe observar que los puntos sigan la línea recta para comprobar la normalidad en los residuos. Para el Caso del Test de Shapiro-Wilk se valida que $H_0:$ Los datos proceden de una distribución normal, donde se concluye que sigue una distribución normal si el $P-value > \alpha$. 
+Para la prueba de normalidad de utiliza el Q-Q plot y la prueba de
+Shapiro-Wilk. En el caso del plot Q-Q se debe observar que los puntos
+sigan la línea recta para comprobar la normalidad en los residuos. Para
+el Caso del Test de Shapiro-Wilk se valida que $H_0:$ Los datos proceden
+de una distribución normal, donde se concluye que sigue una distribución
+normal si el $P-value > \alpha$.
 
 ```{r Eje21, echo=TRUE}
 ## Supuesto de  normalidad
@@ -496,10 +514,13 @@ qqnorm(r, las = 1)
 qqline(r, col = 1, lty = 2)
 ```
 
-Para este caso en particula, se cumple el supuesto de normalidad, dado a que p-values es igual a 0.2237
-## Homocedasticidad
+Para este caso en particula, se cumple el supuesto de normalidad, dado a
+que p-values es igual a 0.2237 \## Homocedasticidad
 
-Para el caso de la prueba de varianza constate (Homocedasticidad), se utiliza el test de Barlett, Donde se valida $H_0:$ la varianza es constante, donde se concluye qe hay homocedasticidad en los residuos si el $P-value > \alpha$. 
+Para el caso de la prueba de varianza constate (Homocedasticidad), se
+utiliza el test de Barlett, Donde se valida $H_0:$ la varianza es
+constante, donde se concluye qe hay homocedasticidad en los residuos si
+el $P-value > \alpha$.
 
 ```{r Eje19, echo=TRUE}
 ## varianza constante usando Breusch-Pagan
@@ -507,17 +528,24 @@ car:::ncvTest(fitdisplay)
 bartlett.test(datos$yield ~ datos$A)
 ```
 
-Para este caso en particula, se cumple el supuesto de homocedasticidad, dado a que p-values es igual a 0.9302
+Para este caso en particula, se cumple el supuesto de homocedasticidad,
+dado a que p-values es igual a 0.9302
 
 ## Independencia de los errores
 
-Una prueba analítica para verificar la independencia entre residuos consecutivos es la prueba de Durbin-Watson. Para validar el suspuesto de independencia de errores en los residuos el $P-value > \alpha$. 
+Una prueba analítica para verificar la independencia entre residuos
+consecutivos es la prueba de Durbin-Watson. Para validar el suspuesto de
+independencia de errores en los residuos el $P-value > \alpha$.
 
 ```{r Eje23, echo=TRUE}
 ## Durbin-Watson (Prueba de independencia dee errores)
 durbinWatsonTest(fitdisplay)
 ```
-Para este caso en particula, se cumple el supuesto de independencia de errores, dado a que p-values es igual a 0.226.
 
-Estos resultados indican que los errores del modelo ajustado son independientes, siguen una distribución normal y tienen varianza constante. Por lo tanto, el modelo y las conclusiones que se deriven de él son valida.
+Para este caso en particula, se cumple el supuesto de independencia de
+errores, dado a que p-values es igual a 0.226.
 
+Estos resultados indican que los errores del modelo ajustado son
+independientes, siguen una distribución normal y tienen varianza
+constante. Por lo tanto, el modelo y las conclusiones que se deriven de
+él son valida.
