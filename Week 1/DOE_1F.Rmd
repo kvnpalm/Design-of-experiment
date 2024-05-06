@@ -433,8 +433,6 @@ Tukey:
 ## Least Singificant Difference (LSD) test
 anova <- aov(fitdisplay)
 (lsd <- TukeyHSD(anova, "peso", ordered = TRUE))
-
-
 ```
 
 Los resultados indican que la diferencia 20-15, 25-15, 30-15, 25-35,

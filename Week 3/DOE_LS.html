@@ -564,12 +564,12 @@ modelo doe cuadrado latino:</p>
 <p><span class="math display">\[ \hat{\mu} =
 \overline{y}_{...}\]</span></p>
 <ul>
-<li>Estimador de la media del tratamiento <span class="math inline">\(i\)</span>.</li>
+<li>Estimador de la media del tratamiento <span class="math inline">\(j\)</span>.</li>
 </ul>
 <p><span class="math display">\[ \hat{\mu_j} =
 \overline{y}_{.j.}\]</span></p>
 <ul>
-<li>Estimador del efecto del tratamiento <span class="math inline">\(i\)</span>.</li>
+<li>Estimador del efecto del tratamiento <span class="math inline">\(j\)</span>.</li>
 </ul>
 <p><span class="math display">\[ \hat{\tau_j} = \overline{y}_{.j.} -
 \overline{y}_{...}\]</span></p>
@@ -846,7 +846,7 @@ independencia de errores en los residuos el <span class="math inline">\(P-value 
 <pre class="r"><code>## Durbin-Watson (Prueba de independencia dee errores)
 durbinWatsonTest(fitdisplay)</code></pre>
 <pre><code>##  lag Autocorrelation D-W Statistic p-value
-##    1       -0.053125      2.042187   0.642
+##    1       -0.053125      2.042187   0.652
 ##  Alternative hypothesis: rho != 0</code></pre>
 <p>Para este caso en particula, se cumple el supuesto de independencia
 de errores, dado a que p-values es igual a 0.61.</p>

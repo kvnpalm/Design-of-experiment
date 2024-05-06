@@ -119,11 +119,11 @@ A continuación presentamos los estimadores de los parámetros del modelo doe cu
 
 $$ \hat{\mu} = \overline{y}_{...}$$
 
--   Estimador de la media del tratamiento $i$.
+-   Estimador de la media del tratamiento $j$.
 
 $$ \hat{\mu_j} = \overline{y}_{.j.}$$
 
--   Estimador del efecto del tratamiento $i$.
+-   Estimador del efecto del tratamiento $j$.
 
 $$ \hat{\tau_j} = \overline{y}_{.j.} - \overline{y}_{...}$$
 
