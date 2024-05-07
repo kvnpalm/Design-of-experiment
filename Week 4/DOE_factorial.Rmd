@@ -171,7 +171,7 @@ Las hipótesis a probar para este DOE son las siguientes:
 
 Es la suma total de cuadrados dada por:
 
-$$SST=\sum_{i=1}^{a}\sum_{j=1}^{b}\sum_{k=1}^{n}y^2_{ijk}-\frac{y^2_{..}}{abn} $$
+$$SST=\sum_{i=1}^{a}\sum_{j=1}^{b}\sum_{k=1}^{n}y^2_{ijk}-\frac{y^2_{...}}{abn} $$
 
 La suma cuadrada del efecto principal A esta expresada por:
 
@@ -389,3 +389,46 @@ TukeyHSD(anova, "Temperature", ordered = TRUE)
 
 ```
 Los resultados indican que la diferencia en la vida media de las baterías producidas con los materiales 3-1 es significativa. En cuanto temperaturas, todos los niveles del factor temperatura difieren entre ellos, siendo 15°C la mejor elección . Observe que la conclusión  es similar a la que obtuvimos al analizar los resultados numéricos.
+
+
+# Supuestos
+
+En general, como se ha estudiando en los anteriores modelos,en DOE factorial al igual que los otros DOE, se tienen
+los siguientes supuestos sobre el error aleatorio, $\varepsilon$:
+
+1.  $\mu_\varepsilon= 0$, donde $\mu_\varepsilon$ es la media de $\varepsilon$. (Linealidad)
+
+2.  $\varepsilon_1, \varepsilon_2, ... , \varepsilon_n$ tiene varianza constante $\sigma^2$ (Homocedasticidad)
+
+3.  $\varepsilon \sim N(0,\sigma^2)$ (Normalidad)
+
+4.  $\varepsilon_i$ y  $\varepsilon_j$ son independientes para $i \neq j$
+
+En R dicha validación se realiza sobre los residuales del modelo ajustado. En nuestro caso, este modelo está contenido en el objeto fit.
+
+```{r Eje20, echo=TRUE, fig.height=10,message=FALSE}
+## varify if car package is available
+if(!require(car)) install.packages('car')
+require(car)
+## compute residuals
+r <- rstudent(fit)
+## normality assumptioms
+shapiro.test(r)
+##
+##  Shapiro-Wilk normality test
+##
+## data:  r
+## W = 0.97952, p-value = 0.7291
+## varianza constante usando Breusch-Pagan
+car:::ncvTest(fit)
+## Non-constant Variance Score Test
+## Variance formula: ~ fitted.values
+## Chisquare = 0.107504, Df = 1, p = 0.743
+## independence using Durbin-Watson
+durbinWatsonTest(fit)
+##  lag Autocorrelation D-W Statistic p-value
+##    1     -0.08923609      2.156227   0.976
+##  Alternative hypothesis: rho != 0
+
+```
+Estos resultados indican que los errores del modelo ajustado son independientes, siguen una distribución normal y tienen varianza constante. Por lo tanto, el modelo y las conclusiones que se deriven de e ́l son válidas.

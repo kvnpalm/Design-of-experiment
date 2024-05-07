@@ -778,6 +778,63 @@ ellos, siendo 15°C la mejor elección . Observe que la conclusión es
 similar a la que obtuvimos al analizar los resultados numéricos.</p>
 </div>
 </div>
+<div id="supuestos" class="section level1">
+<h1>Supuestos</h1>
+<p>En general, como se ha estudiando en los anteriores modelos,en DOE
+factorial al igual que los otros DOE, se tienen los siguientes supuestos
+sobre el error aleatorio, <span class="math inline">\(\varepsilon\)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\mu_\varepsilon= 0\)</span>, donde
+<span class="math inline">\(\mu_\varepsilon\)</span> es la media de
+<span class="math inline">\(\varepsilon\)</span>. (Linealidad)</p></li>
+<li><p><span class="math inline">\(\varepsilon_1, \varepsilon_2, ... ,
+\varepsilon_n\)</span> tiene varianza constante <span class="math inline">\(\sigma^2\)</span> (Homocedasticidad)</p></li>
+<li><p><span class="math inline">\(\varepsilon \sim
+N(0,\sigma^2)\)</span> (Normalidad)</p></li>
+<li><p><span class="math inline">\(\varepsilon_i\)</span> y <span class="math inline">\(\varepsilon_j\)</span> son independientes para
+<span class="math inline">\(i \neq j\)</span></p></li>
+</ol>
+<p>En R dicha validación se realiza sobre los residuales del modelo
+ajustado. En nuestro caso, este modelo está contenido en el objeto
+fit.</p>
+<pre class="r"><code>## varify if car package is available
+if(!require(car)) install.packages(&#39;car&#39;)
+require(car)
+## compute residuals
+r &lt;- rstudent(fit)
+## normality assumptioms
+shapiro.test(r)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  r
+## W = 0.97952, p-value = 0.7291</code></pre>
+<pre class="r"><code>##
+##  Shapiro-Wilk normality test
+##
+## data:  r
+## W = 0.97952, p-value = 0.7291
+## varianza constante usando Breusch-Pagan
+car:::ncvTest(fit)</code></pre>
+<pre><code>## Non-constant Variance Score Test 
+## Variance formula: ~ fitted.values 
+## Chisquare = 0.107504, Df = 1, p = 0.743</code></pre>
+<pre class="r"><code>## Non-constant Variance Score Test
+## Variance formula: ~ fitted.values
+## Chisquare = 0.107504, Df = 1, p = 0.743
+## independence using Durbin-Watson
+durbinWatsonTest(fit)</code></pre>
+<pre><code>##  lag Autocorrelation D-W Statistic p-value
+##    1      0.04170301      1.894349    0.34
+##  Alternative hypothesis: rho != 0</code></pre>
+<pre class="r"><code>##  lag Autocorrelation D-W Statistic p-value
+##    1     -0.08923609      2.156227   0.976
+##  Alternative hypothesis: rho != 0</code></pre>
+<p>Estos resultados indican que los errores del modelo ajustado son
+independientes, siguen una distribución normal y tienen varianza
+constante. Por lo tanto, el modelo y las conclusiones que se deriven de
+e ́l son válidas.</p>
+</div>
 
 
 
