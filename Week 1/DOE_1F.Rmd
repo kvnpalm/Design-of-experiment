@@ -39,8 +39,10 @@ variable de respuesta.
 
 **Objetivo:**
 
--   Evaluar si existe una diferencia significativa entre las medias de los diferentes niveles del factor.
--   Determinar si el factor tiene un efecto significativo sobre la variable de respuesta.
+-   Evaluar si existe una diferencia significativa entre las medias de
+    los diferentes niveles del factor.
+-   Determinar si el factor tiene un efecto significativo sobre la
+    variable de respuesta.
 
 **Componentes del ANOVA:**
 
@@ -504,16 +506,19 @@ señala qué tan bien el modelo describe los datos.
 En general, En DOE de un factor al igual que los otros DOE, se tienen
 los siguientes supuestos sobre el error aleatorio, $\varepsilon$:
 
-1.  $\mu_\varepsilon= 0$, donde $\mu_\varepsilon$ es la media de $\varepsilon$. (Linealidad)
+1.  $\mu_\varepsilon= 0$, donde $\mu_\varepsilon$ es la media de
+    $\varepsilon$. (Linealidad)
 
-2.  $\varepsilon_1, \varepsilon_2, ... , \varepsilon_n$ tiene varianza constante $\sigma^2$ (Homocedasticidad)
+2.  $\varepsilon_1, \varepsilon_2, ... , \varepsilon_n$ tiene varianza
+    constante $\sigma^2$ (Homocedasticidad)
 
 3.  $\varepsilon \sim N(0,\sigma^2)$ (Normalidad)
 
-4.  $\varepsilon_i$ y  $\varepsilon_j$ son independientes para $i \neq j$
+4.  $\varepsilon_i$ y $\varepsilon_j$ son independientes para $i \neq j$
 
-
-En R dicha validación se realiza sobre los residuales del modelo ajustado. En nuestro caso, este modelo está contenido en el objeto fitdidisplays.
+En R dicha validación se realiza sobre los residuales del modelo
+ajustado. En nuestro caso, este modelo está contenido en el objeto
+fitdidisplays.
 
 ```{r Eje20, echo=TRUE, fig.height=10,message=FALSE}
 require(car)
@@ -524,7 +529,12 @@ r <- rstudent(fitdisplay)
 
 ## Normalidad
 
-Para la prueba de normalidad de utiliza el Q-Q plot y la prueba de Shapiro-Wilk. En el caso del plot Q-Q se debe observar que los puntos sigan la línea recta para comprobar la normalidad en los residuos. Para el Caso del Test de Shapiro-Wilk se valida que $H_0:$ Los datos proceden de una distribución normal, donde se concluye que sigue una distribución normal si el $P-value > \alpha$. 
+Para la prueba de normalidad de utiliza el Q-Q plot y la prueba de
+Shapiro-Wilk. En el caso del plot Q-Q se debe observar que los puntos
+sigan la línea recta para comprobar la normalidad en los residuos. Para
+el Caso del Test de Shapiro-Wilk se valida que $H_0:$ Los datos proceden
+de una distribución normal, donde se concluye que sigue una distribución
+normal si el $P-value > \alpha$.
 
 ```{r Eje21, echo=TRUE}
 ## Supuesto de  normalidad
@@ -534,12 +544,15 @@ qqnorm(r, las = 1)
 qqline(r, col = 1, lty = 2)
 ```
 
-
-Para este caso en particula, se cumple el supuesto de normalidad, dado a que p-values es igual a 0.4917
+Para este caso en particula, se cumple el supuesto de normalidad, dado a
+que p-values es igual a 0.4917
 
 ## Homocedasticidad
 
-Para el caso de la prueba de varianza constate (Homocedasticidad), se utiliza el test de Barlett, Donde se valida $H_0:$ la varianza es constante, donde se concluye qe hay homocedasticidad en los residuos si el $P-value > \alpha$. 
+Para el caso de la prueba de varianza constate (Homocedasticidad), se
+utiliza el test de Barlett, Donde se valida $H_0:$ la varianza es
+constante, donde se concluye qe hay homocedasticidad en los residuos si
+el $P-value > \alpha$.
 
 ```{r Eje19, echo=TRUE}
 ## varianza constante usando Breusch-Pagan
@@ -547,17 +560,22 @@ car:::ncvTest(fitdisplay)
 bartlett.test(datos$resistencia ~ datos$peso)
 ```
 
-Para este caso en particula, se cumple el supuesto de homocedasticidad, dado a que p-values es igual a 0.919
+Para este caso en particula, se cumple el supuesto de homocedasticidad,
+dado a que p-values es igual a 0.919
 
 ## Independencia de los errores
 
-Una prueba analítica para verificar la independencia entre residuos consecutivos es la prueba de Durbin-Watson. Para validar el suspuesto de independencia de errores en los residuos el $P-value > \alpha$. 
+Una prueba analítica para verificar la independencia entre residuos
+consecutivos es la prueba de Durbin-Watson. Para validar el suspuesto de
+independencia de errores en los residuos el $P-value > \alpha$.
 
 ```{r Eje23, echo=TRUE}
 ## Durbin-Watson (Prueba de independencia dee errores)
 durbinWatsonTest(fitdisplay)
 ```
-Para este caso en particula, se cumple el supuesto de independencia de errores, dado a que p-values es igual a 0.806.
+
+Para este caso en particula, se cumple el supuesto de independencia de
+errores, dado a que p-values es igual a 0.806.
 
 Gráficamente, podemos validar los supuestos con los siguientes plots:
 
@@ -575,4 +593,7 @@ acf(r, las = 1, main = "")
 mtext("ACF", side = 3, line = .2)
 ```
 
-Estos resultados indican que los errores del modelo ajustado son independientes, siguen una distribución normal y tienen varianza constante. Por lo tanto, el modelo y las conclusiones que se deriven de él son valida.
+Estos resultados indican que los errores del modelo ajustado son
+independientes, siguen una distribución normal y tienen varianza
+constante. Por lo tanto, el modelo y las conclusiones que se deriven de
+él son valida.
